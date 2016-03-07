@@ -176,7 +176,8 @@
                 </td>
                 <td width="65">
                   
-                    <asp:ImageButton ID="btnNuevo" runat="server" ImageUrl="~/images/Nuevo.jpg" />
+                    <asp:ImageButton ID="btnNuevo" runat="server" ImageUrl="~/images/Nuevo.jpg" 
+                        onclick="btnNuevo_Click" />
                   
                 </td>
                 <td width="65">
@@ -715,11 +716,12 @@
                                 ForeColor="#18AC85" Text="*"></asp:Label>
                         </td>
                         <td class="tdDatos" style="padding-left: 5px">
-                            <asp:UpdatePanel ID="UpdatePanel3" runat="server">
-                            <ContentTemplate>
+                            
                             <table cellpadding="0" cellspacing="0">
                                 <tr>
                                     <td width="210">
+                                    <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+                            <ContentTemplate>
                                         <asp:TextBox ID="txtMarca" runat="server" CssClass="inputNormal" Width="200px"></asp:TextBox>
                                         <cc1:AutoCompleteExtender ID="txtMarca_AutoCompleteExtender" runat="server" 
                                             CompletionInterval="100" CompletionListCssClass="AutoExtender" 
@@ -730,22 +732,33 @@
                                             ServicePath="" ShowOnlyCurrentWordInCompletionListItem="True" 
                                             TargetControlID="txtMarca">
                                         </cc1:AutoCompleteExtender>
+                                        <asp:HiddenField ID="hfMarca" runat="server" 
+                                OnValueChanged="hfMarca_ValueChanged" />
+                                              </ContentTemplate>
+                                </asp:UpdatePanel>
                                     </td>
                                     <td width="15">
                                         <asp:ImageButton ID="btnEditarMarca" runat="server" 
                                             ImageUrl="~/images/edit.png" OnClick="btnEditarMarca_Click" 
-                                            ToolTip="Editar Marca" Visible="False" />
+                                            ToolTip="Editar Marca" Visible="False" CausesValidation="False" 
+                                            ClientIDMode="Static" />
                                     </td>
                                     <td align="left" width="20">
+                                        <asp:UpdatePanel ID="UpdatePanel5" runat="server">
+                                        <ContentTemplate>
                                         <asp:ImageButton ID="btnNuevaMarca" runat="server" ImageUrl="~/images/add.png" 
-                                            OnClick="btnNuevaMarca_Click" ToolTip="Nueva Marca" />
+                                            OnClick="btnNuevaMarca_Click" ToolTip="Nueva Marca" 
+                                            CausesValidation="False" />
+                                            </ContentTemplate>
+                                            <Triggers>
+                                                <asp:PostBackTrigger ControlID="btnNuevaMarca" />
+                                            </Triggers>
+                                            </asp:UpdatePanel>
                                     </td>
                                 </tr>
                             </table>
-                            <asp:HiddenField ID="hfMarca" runat="server" 
-                                OnValueChanged="hfMarca_ValueChanged" />
-                                </ContentTemplate>
-                                </asp:UpdatePanel>
+                            
+                          
                         </td>
                         
                         
@@ -766,12 +779,13 @@
                                 ForeColor="#18AC85" Text="*"></asp:Label>
                         </td>
                         <td class="tdDatos" style="padding-left: 5px">
-                            <asp:UpdatePanel ID="UpdatePanel4" runat="server">
-                            <ContentTemplate>
+                            
 
                             <table cellpadding="0" cellspacing="0">
                                 <tr>
                                     <td width="210">
+                                    <asp:UpdatePanel ID="UpdatePanel4" runat="server">
+                            <ContentTemplate>
                                         <asp:TextBox ID="txtModelo" runat="server" CssClass="inputNormal" Width="200px"></asp:TextBox>
                                         <cc1:AutoCompleteExtender ID="txtModelo_AutoCompleteExtender" runat="server" 
                                             CompletionInterval="100" CompletionListCssClass="AutoExtender" 
@@ -782,23 +796,32 @@
                                             ShowOnlyCurrentWordInCompletionListItem="True" TargetControlID="txtModelo" 
                                             UseContextKey="True">
                                         </cc1:AutoCompleteExtender>
+                                        <asp:HiddenField ID="hfModelo" runat="server" 
+                                OnValueChanged="hfModelo_ValueChanged" />
+                                        </ContentTemplate>
+                            </asp:UpdatePanel>
                                     </td>
                                     <td width="15">
                                         <asp:ImageButton ID="btnEditarModelo" runat="server" 
                                             ImageUrl="~/images/edit.png" OnClick="btnEditarModelo_Click" 
-                                            ToolTip="Editar Modelo" Visible="False" />
+                                            ToolTip="Editar Modelo" Visible="False" ClientIDMode="Static" />
                                     </td>
                                     <td align="left" width="20">
+                                        <asp:UpdatePanel ID="UpdatePanel6" runat="server">
+                                        <ContentTemplate>
                                         <asp:ImageButton ID="btnNuevoModelo" runat="server" ImageUrl="~/images/add.png" 
                                             OnClick="btnNuevoModelo_Click" ToolTip="Nuevo Modelo" Visible="False" />
+                                            </ContentTemplate>
+                                            <Triggers>
+                                                <asp:PostBackTrigger ControlID="btnNuevoModelo" />
+                                            </Triggers>
+</asp:UpdatePanel>
                                     </td>
                                 </tr>
                             </table>
-                            <asp:HiddenField ID="hfModelo" runat="server" 
-                                OnValueChanged="hfModelo_ValueChanged" />
+                            
 
-                                </ContentTemplate>
-                            </asp:UpdatePanel>
+                                
                         </td>
                         
                         
@@ -1481,7 +1504,7 @@
                         </td>
                         <td>
                             <asp:ImageButton ID="btnSalirCliente" runat="server" 
-                                ImageUrl="~/images/Salir.jpg" onclick="btnSalirCliente_Click" />
+                                ImageUrl="~/images/Regresar.jpg" onclick="btnSalirCliente_Click" />
                         </td>
                     </tr>
                 </table>
@@ -1584,7 +1607,7 @@
                         </td>
                         <td>
                             <asp:ImageButton ID="btnCancelarMarca" runat="server" 
-                                ImageUrl="~/images/Salir.jpg" onclick="btnCancelarMarca_Click" />
+                                ImageUrl="~/images/Regresar.jpg" onclick="btnCancelarMarca_Click" />
                         </td>
                     </tr>
                 </table>
@@ -1687,7 +1710,7 @@
                         </td>
                         <td>
                             <asp:ImageButton ID="btnCancelarModelo" runat="server" 
-                                ImageUrl="~/images/Salir.jpg" onclick="btnCancelarModelo_Click" />
+                                ImageUrl="~/images/Regresar.jpg" onclick="btnCancelarModelo_Click" />
                         </td>
                     </tr>
                 </table>

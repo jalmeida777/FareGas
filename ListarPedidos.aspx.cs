@@ -18,7 +18,7 @@ public partial class ListarPedidos : System.Web.UI.Page
         {
             txtFechaInicial.Text = DateTime.Now.ToShortDateString();
             txtFechaFinal.Text = DateTime.Now.ToShortDateString();
-            ListarSucursal();
+            ListarEmpresas();
             Listar();
         }
     }
@@ -31,6 +31,14 @@ public partial class ListarPedidos : System.Web.UI.Page
             string FechaFinal = DateTime.Parse(txtFechaFinal.Text).Year.ToString("0000") + DateTime.Parse(txtFechaFinal.Text).Month.ToString("00") + DateTime.Parse(txtFechaFinal.Text).Day.ToString("00");
             lblFechaInicial.Text = FechaInicial;
             lblFechaFinal.Text = FechaFinal;
+            if (ddlEmpresa.SelectedIndex == 0)
+            {
+                lblEmpresa.Text = "%";
+            }
+            else
+            {
+                lblEmpresa.Text = ddlEmpresa.SelectedItem.Text;
+            }
         }
         catch (Exception)
         {
@@ -38,37 +46,23 @@ public partial class ListarPedidos : System.Web.UI.Page
         }
     }
 
-    void ListarSucursal()
-    {
-        if (Session["dtAlmacenes"] != null)
-        {
-            DataTable dtAlmacen = new DataTable();
-            dtAlmacen = (DataTable)Session["dtAlmacenes"];
-            ddlEmpresa.DataSource = dtAlmacen;
-            ddlEmpresa.DataTextField = "v_Descripcion";
-            ddlEmpresa.DataValueField = "n_IdAlmacen";
-            ddlEmpresa.DataBind();
-            //ddlAlmacen.Items.Insert(0, "TODOS");
-            ddlEmpresa.SelectedIndex = 0;
-            if (dtAlmacen.Rows.Count >= 1)
-            {
-                ddlEmpresa.Enabled = true;
-            }
-            else
-            {
-                ddlEmpresa.Enabled = false;
-            }
-        }
-        else
-        {
-            ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.warning({ message: 'Su sesión ha caducado. Vuelva a ingresar al sistema.' });</script>", false);
-        }
-    }
-
     protected void btnConsultar_Click(object sender, ImageClickEventArgs e)
     {
         Listar();
     }
+
+    void ListarEmpresas() 
+    {
+        SqlDataAdapter da = new SqlDataAdapter("Faregas_Empresa_Combo", conexion);
+        DataTable dt = new DataTable();
+        da.Fill(dt);
+        ddlEmpresa.DataSource = dt;
+        ddlEmpresa.DataTextField = "v_RazonSocial";
+        ddlEmpresa.DataValueField = "i_IdEmpresa";
+        ddlEmpresa.DataBind();
+        ddlEmpresa.Items.Insert(0, "Todas");
+    }
+
 
     protected void btnNuevo_Click(object sender, ImageClickEventArgs e)
     {

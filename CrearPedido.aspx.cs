@@ -376,8 +376,8 @@ public partial class CrearPedido : System.Web.UI.Page
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = "Faregas_Pedido_Registrar";
                 cmd.Parameters.AddWithValue("@i_IdEmpresa", ddlEmpresa.SelectedValue);
-                cmd.Parameters.AddWithValue("@v_NumeroCertificado", txtNumeroCertificado.Text.Trim());
-                cmd.Parameters.AddWithValue("@v_NumeroHoja", txtNumeroHoja.Text.Trim());
+                cmd.Parameters.AddWithValue("@v_NumeroCertificado", txtNumeroCertificado.Text.Trim().ToUpper());
+                cmd.Parameters.AddWithValue("@v_NumeroHoja", txtNumeroHoja.Text.Trim().ToUpper());
                 cmd.Parameters.AddWithValue("@d_FechaEmision", DateTime.Parse(txtFechaInicial.Text + " " + DateTime.Now.Hour.ToString("00") + ":" + DateTime.Now.Minute.ToString("00") + ":" + DateTime.Now.Second.ToString("00")));
                 cmd.Parameters.AddWithValue("@n_IdFormaPago", ddlFormaPago.SelectedValue);
                 cmd.Parameters.AddWithValue("@n_IdMoneda", ddlMoneda.SelectedValue);
@@ -386,18 +386,18 @@ public partial class CrearPedido : System.Web.UI.Page
                 cmd.Parameters.AddWithValue("@f_Total", double.Parse(lblTotal.Text));
                 cmd.Parameters.AddWithValue("@f_Pago", double.Parse(txtPago.Text));
                 cmd.Parameters.AddWithValue("@f_Vuelto", double.Parse(lblVuelto.Text));
-                cmd.Parameters.AddWithValue("@v_NroPlaca", txtPlaca.Text.Trim());
+                cmd.Parameters.AddWithValue("@v_NroPlaca", txtPlaca.Text.Trim().ToUpper());
                 cmd.Parameters.AddWithValue("@i_IdCategoria", ddlCategoria.SelectedValue);
                 cmd.Parameters.AddWithValue("@i_IdMarca", hfMarca.Value);
                 cmd.Parameters.AddWithValue("@i_IdModelo", hfModelo.Value);
                 cmd.Parameters.AddWithValue("@i_IdClaseVehiculo", ddlClase.SelectedValue);
                 cmd.Parameters.AddWithValue("@i_IdCarroceria", ddlCarroceria.SelectedValue);
-                cmd.Parameters.AddWithValue("@v_Potencia", txtPotencia.Text.Trim());
-                cmd.Parameters.AddWithValue("@v_Version", txtVersion.Text.Trim());
+                cmd.Parameters.AddWithValue("@v_Potencia", txtPotencia.Text.Trim().ToUpper());
+                cmd.Parameters.AddWithValue("@v_Version", txtVersion.Text.Trim().ToUpper());
                 cmd.Parameters.AddWithValue("@i_Anio", int.Parse(txtAnioFabricacion.Text));
-                cmd.Parameters.AddWithValue("@v_Serie", txtNumeroSerie.Text.Trim());
-                cmd.Parameters.AddWithValue("@v_Motor", txtNumeroMotor.Text.Trim());
-                cmd.Parameters.AddWithValue("@v_Color", txtColor.Text.Trim());
+                cmd.Parameters.AddWithValue("@v_Serie", txtNumeroSerie.Text.Trim().ToUpper());
+                cmd.Parameters.AddWithValue("@v_Motor", txtNumeroMotor.Text.Trim().ToUpper());
+                cmd.Parameters.AddWithValue("@v_Color", txtColor.Text.Trim().ToUpper());
                 cmd.Parameters.AddWithValue("@i_Cilindros", int.Parse(txtCilindros.Text));
                 cmd.Parameters.AddWithValue("@f_Cilindrada", float.Parse(txtCilindrada.Text));
                 cmd.Parameters.AddWithValue("@i_Ejes", int.Parse(txtEjes.Text));
@@ -444,11 +444,11 @@ public partial class CrearPedido : System.Web.UI.Page
                 {
                     cmd.Parameters.AddWithValue("@i_CargaUtilFinal", int.Parse(txtCargaUtilFinal.Text));
                 }
-                cmd.Parameters.AddWithValue("@v_Propietario", txtNombrePropietario.Text.Trim());
+                cmd.Parameters.AddWithValue("@v_Propietario", txtNombrePropietario.Text.Trim().ToUpper());
                 cmd.Parameters.AddWithValue("@n_IdUsuarioRegistra", n_IdUsuario);
                 cmd.Parameters.AddWithValue("@t_Obs", txtObservacion.Text);
-                cmd.Parameters.AddWithValue("@v_RangoHojasInicial", txtNumeroHojaInicial.Text.Trim());
-                cmd.Parameters.AddWithValue("@v_RangoHojasFinal", txtNumeroHojaFinal.Text.Trim());
+                cmd.Parameters.AddWithValue("@v_RangoHojasInicial", txtNumeroHojaInicial.Text.Trim().ToUpper());
+                cmd.Parameters.AddWithValue("@v_RangoHojasFinal", txtNumeroHojaFinal.Text.Trim().ToUpper());
                 cmd.Parameters.AddWithValue("@i_IdPropietario", hdnPropietario.Value);
                 cmd.Parameters.AddWithValue("@i_IdCliente", hdnValue.Value);
                 string n_IdPedido = cmd.ExecuteScalar().ToString();
@@ -755,7 +755,8 @@ public partial class CrearPedido : System.Web.UI.Page
     protected void btnSalir_Click(object sender, ImageClickEventArgs e)
     {
         Session.Remove("Detalle");
-        Response.Redirect("Principal.aspx");
+        int i_IdMenu = int.Parse(Request.QueryString["IdMenu"]);
+        Response.Redirect("ListarPedidos.aspx?IdMenu=" + i_IdMenu);
     }
 
     protected void btnGuardarCliente_Click(object sender, ImageClickEventArgs e)
@@ -1076,6 +1077,7 @@ public partial class CrearPedido : System.Web.UI.Page
         txtModelo.Text = "";
         hfModelo.Value = "0";
         btnNuevoModelo.Visible = true;
+        btnNuevaMarca.Visible = false;
         txtModelo.Focus();
     }
 
@@ -1089,6 +1091,7 @@ public partial class CrearPedido : System.Web.UI.Page
     {
         txtModelo.Enabled = false;
         btnEditarModelo.Visible = true;
+        btnNuevoModelo.Visible = false;
         txtModelo.BackColor = System.Drawing.Color.FromName("#CEE7FF");
         if (hfMarca.Value != "") { txtMarca.BackColor = System.Drawing.Color.FromName("#CEE7FF"); }
         txtAnioFabricacion.Focus();
@@ -1295,5 +1298,12 @@ public partial class CrearPedido : System.Web.UI.Page
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.error({ message: '" + ex.Message + "' });</script>", false);
             }
         }
+    }
+
+    protected void btnNuevo_Click(object sender, ImageClickEventArgs e)
+    {
+        Session.Remove("Detalle");
+        int i_IdMenu = int.Parse(Request.QueryString["IdMenu"]);
+        Response.Redirect("CrearPedido.aspx?IdMenu=" + i_IdMenu);
     }
 }

@@ -20,9 +20,9 @@
         <div class="divBusqueda">
             <table width="100%">
                 <tr>
-                    <td colspan="10">
+                    <td colspan="7">
                         <h1 class="label">
-                            Pedidos de Venta</h1>
+                            Ordenes de Servicio</h1>
                     </td>
                 </tr>
                 <tr>
@@ -48,30 +48,43 @@
                             Enabled="True" Format="dd/MM/yyyy" TargetControlID="txtFechaFinal">
                         </cc1:CalendarExtender>
                     </td>
-                    <td width="70">
+                    <td width="90">
                         <asp:Label ID="Label3" runat="server" Font-Bold="False" Text="Empresa:"></asp:Label>
                     </td>
-                    <td class="label" width="210">
+                    <td class="label" width="280">
                         <asp:DropDownList ID="ddlEmpresa" runat="server" 
                             CssClass="combo" 
-                            Width="200px">
+                            Width="270px">
                         </asp:DropDownList>
                     </td>
                     <td class="label">
                         
-                        <asp:CheckBox ID="chkHabilitado" runat="server" Checked="True" 
-                            Font-Bold="False" Text="Activos" />
-                        
-                        <asp:Label ID="lblFechaInicial" runat="server" Visible="False"></asp:Label>
-                        <asp:Label ID="lblFechaFinal" runat="server" Visible="False"></asp:Label>
-                        
-                    </td>
-                    <td align="right">
-                        </td>
-                    <td align="right" width="70">
                         &nbsp;</td>
-                    <td align="right" width="70">
-                        &nbsp;&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="label" width="90">
+                        <asp:Label ID="Label4" runat="server" Text="Nro. Placa:"></asp:Label>
+                    </td>
+                    <td width="110">
+                        <asp:TextBox ID="txtPlaca" runat="server" CssClass="inputNormal" MaxLength="50" 
+                            Width="90px"></asp:TextBox>
+                    </td>
+                    <td class="label" width="85">
+                        <asp:Label ID="Label5" runat="server" Text="Nro. Orden:"></asp:Label>
+                    </td>
+                    <td width="110">
+                        <asp:TextBox ID="txtOrdenServicio" runat="server" CssClass="inputNormal" 
+                            MaxLength="10" Width="90px"></asp:TextBox>
+                    </td>
+                    <td width="70">
+                        <asp:Label ID="Label6" runat="server" Text="Propietario:"></asp:Label>
+                    </td>
+                    <td class="label" width="210">
+                        <asp:TextBox ID="txtPropietario" runat="server" CssClass="inputNormal" 
+                            Width="270px"></asp:TextBox>
+                    </td>
+                    <td class="label">
+                        &nbsp;</td>
                 </tr>
             </table>
             </div>
@@ -87,19 +100,209 @@
                 <td>
                     <asp:ImageButton ID="btnSalir" runat="server" ImageUrl="~/images/Salir.jpg" 
                         onclick="btnSalir_Click" />
+                    <asp:Label ID="lblFechaInicial" runat="server" Visible="False"></asp:Label>
+                    <asp:Label ID="lblFechaFinal" runat="server" Visible="False"></asp:Label>
+                    <asp:Label ID="lblEmpresa" runat="server" Visible="False"></asp:Label>
                 </td>
                 </tr></table>
             </div>
             <asp:UpdateProgress ID="UpdateProgress1" runat="server" 
-        AssociatedUpdatePanelID="UpdatePanel1">
+        AssociatedUpdatePanelID="UpdatePanel1" DisplayAfter="0">
                 <ProgressTemplate>
                     <img src="images/loading.gif" />
                 </ProgressTemplate>
             </asp:UpdateProgress>
             <asp:Panel ID="Panel1" runat="server" Height="600px" ScrollBars="Vertical" 
                 Width="100%">
+
+
+                                <dx:ASPxGridView ID="ASPxGridView1" runat="server" AutoGenerateColumns="False" 
+                    CssFilePath="~/App_Themes/PlasticBlue/{0}/styles.css" CssPostfix="PlasticBlue" 
+                    DataSourceID="SqlDataSource1" EnableCallbackCompression="False" 
+                    EnableCallBacks="False" EnableRowsCache="False" EnableTheming="False" 
+                    EnableViewState="False" KeyFieldName="n_IdPedido" 
+                    onhtmlrowprepared="ASPxGridView1_HtmlRowPrepared" Width="100%">
+                    <TotalSummary>
+                        <dx:ASPxSummaryItem DisplayFormat="{0:C}" FieldName="f_Total" 
+                            ShowInColumn="Total" ShowInGroupFooterColumn="Total" SummaryType="Sum" />
+                    </TotalSummary>
+                    <Columns>
+                        <dx:GridViewDataTextColumn Caption="N° Orden" VisibleIndex="0" Width="80px" 
+                            FieldName="v_NumeroPedido" ShowInCustomizationForm="True">
+                            <DataItemTemplate>
+                                <asp:LinkButton ID="LinkButton1" runat="server" Font-Underline="True" 
+                                    ForeColor="Blue" Text='<%# Bind("v_NumeroPedido") %>'></asp:LinkButton>
+                            </DataItemTemplate>
+                        </dx:GridViewDataTextColumn>
+                        <dx:GridViewDataTextColumn Caption="Fecha" FieldName="d_FechaEmision" 
+                            VisibleIndex="1" Width="120px" ShowInCustomizationForm="True">
+                        </dx:GridViewDataTextColumn>
+                        <dx:GridViewDataTextColumn Caption="Propietario" FieldName="Propietario" 
+                            VisibleIndex="3" Width="120px" ShowInCustomizationForm="True">
+                        </dx:GridViewDataTextColumn>
+                        <dx:GridViewDataTextColumn Caption="Forma de Pago" FieldName="v_FormaPago" 
+                            VisibleIndex="4" Width="100px" ShowInCustomizationForm="True">
+                        </dx:GridViewDataTextColumn>
+                        <dx:GridViewDataTextColumn Caption="Placa" FieldName="v_NroPlaca" 
+                            VisibleIndex="2" Width="120px" ShowInCustomizationForm="True">
+                        </dx:GridViewDataTextColumn>
+                        <dx:GridViewDataTextColumn Caption="Creado por" FieldName="Usuario" 
+                            VisibleIndex="5" Width="150px" ShowInCustomizationForm="True">
+                        </dx:GridViewDataTextColumn>
+                        <dx:GridViewDataTextColumn Caption="Total" FieldName="f_Total" VisibleIndex="8" 
+                            Width="80px" ShowInCustomizationForm="True">
+                            <PropertiesTextEdit DisplayFormatString="{0:C}">
+                            </PropertiesTextEdit>
+                        </dx:GridViewDataTextColumn>
+                        <dx:GridViewDataTextColumn Caption="Sub Total" FieldName="f_SubTotal" 
+                            ShowInCustomizationForm="True" VisibleIndex="6" Width="80px">
+                            <propertiestextedit displayformatstring="{0:C}">
+                            </propertiestextedit>
+                        </dx:GridViewDataTextColumn>
+                        <dx:GridViewDataTextColumn Caption="IGV" FieldName="f_Impuesto" 
+                            ShowInCustomizationForm="True" VisibleIndex="7" Width="80px">
+                            <propertiestextedit displayformatstring="{0:C}">
+                            </propertiestextedit>
+                        </dx:GridViewDataTextColumn>
+                        <dx:GridViewDataTextColumn Caption="Estado" FieldName="Estado" VisibleIndex="9" 
+                            Width="50px">
+                        </dx:GridViewDataTextColumn>
+                    </Columns>
+                    <SettingsBehavior AutoFilterRowInputDelay="0" />
+                                    <SettingsBehavior AutoFilterRowInputDelay="0" />
+                                    <SettingsBehavior AutoFilterRowInputDelay="0" />
+                    <SettingsPager PageSize="5" ShowDefaultImages="False">
+                        <AllButton Text="All">
+                        </AllButton>
+                        <NextPageButton Text="Next &gt;">
+                        </NextPageButton>
+                        <PrevPageButton Text="&lt; Prev">
+                        </PrevPageButton>
+                    </SettingsPager>
+                    <Settings ShowFooter="True" />
+                    <SettingsCookies StoreFiltering="False" />
+                    <SettingsDetail ShowDetailRow="True" />
+                                    <Settings ShowFooter="True" />
+                                    <SettingsCookies StoreFiltering="False" />
+                                    <SettingsDetail ShowDetailRow="True" />
+                                    <Settings ShowFooter="True" />
+                                    <SettingsCookies StoreFiltering="False" />
+                                    <SettingsDetail ShowDetailRow="True" />
+                    <Images SpriteCssFilePath="~/App_Themes/PlasticBlue/{0}/sprite.css">
+                        <LoadingPanelOnStatusBar Url="~/App_Themes/PlasticBlue/GridView/gvLoadingOnStatusBar.gif">
+                        </LoadingPanelOnStatusBar>
+                        <LoadingPanel Url="~/App_Themes/PlasticBlue/GridView/Loading.gif">
+                        </LoadingPanel>
+                    </Images>
+                    <ImagesFilterControl>
+                        <LoadingPanel Url="~/App_Themes/PlasticBlue/Editors/Loading.gif">
+                        </LoadingPanel>
+                    </ImagesFilterControl>
+                    <Styles CssFilePath="~/App_Themes/PlasticBlue/{0}/styles.css" 
+                        CssPostfix="PlasticBlue">
+                        <Header ImageSpacing="10px" SortingImageSpacing="10px">
+                        </Header>
+                    </Styles>
+                    <StylesEditors>
+                        <CalendarHeader Spacing="11px">
+                        </CalendarHeader>
+                        <ProgressBar Height="25px">
+                        </ProgressBar>
+                    </StylesEditors>
+                    <Templates>
+                        <DetailRow>
+                            <dx:ASPxGridView ID="gvDetalle" runat="server" AutoGenerateColumns="False" 
+                                CssFilePath="~/App_Themes/PlasticBlue/{0}/styles.css" CssPostfix="PlasticBlue" 
+                                DataSourceID="SqlDataSource2" 
+                                onbeforeperformdataselect="gvDetalle_BeforePerformDataSelect" Width="100%">
+                                <Columns>
+                                    <dx:GridViewDataTextColumn Caption="Cantidad" FieldName="i_Cantidad" 
+                                        VisibleIndex="0" Width="80px">
+                                    </dx:GridViewDataTextColumn>
+                                    <dx:GridViewDataTextColumn Caption="Precio Unitario S/." 
+                                        FieldName="f_PrecioUnitario" VisibleIndex="3" Width="100px">
+                                        <PropertiesTextEdit DisplayFormatString="{0:C}">
+                                        </PropertiesTextEdit>
+                                    </dx:GridViewDataTextColumn>
+                                    <dx:GridViewDataTextColumn Caption="Precio Total S/." FieldName="f_PrecioTotal" 
+                                        VisibleIndex="4" Width="100px">
+                                        <PropertiesTextEdit DisplayFormatString="{0:C}">
+                                        </PropertiesTextEdit>
+                                    </dx:GridViewDataTextColumn>
+                                    <dx:GridViewDataTextColumn Caption="Producto" FieldName="Producto" 
+                                        VisibleIndex="2">
+                                    </dx:GridViewDataTextColumn>
+                                </Columns>
+                                <SettingsPager ShowDefaultImages="False" Visible="False">
+                                    <AllButton Text="All">
+                                    </AllButton>
+                                    <NextPageButton Text="Next &gt;">
+                                    </NextPageButton>
+                                    <PrevPageButton Text="&lt; Prev">
+                                    </PrevPageButton>
+                                </SettingsPager>
+                                <Images SpriteCssFilePath="~/App_Themes/PlasticBlue/{0}/sprite.css">
+                                    <LoadingPanelOnStatusBar Url="~/App_Themes/PlasticBlue/GridView/gvLoadingOnStatusBar.gif">
+                                    </LoadingPanelOnStatusBar>
+                                    <LoadingPanel Url="~/App_Themes/PlasticBlue/GridView/Loading.gif">
+                                    </LoadingPanel>
+                                </Images>
+                                <ImagesFilterControl>
+                                    <LoadingPanel Url="~/App_Themes/PlasticBlue/Editors/Loading.gif">
+                                    </LoadingPanel>
+                                </ImagesFilterControl>
+                                <Styles CssFilePath="~/App_Themes/PlasticBlue/{0}/styles.css" 
+                                    CssPostfix="PlasticBlue">
+                                    <Header ImageSpacing="10px" SortingImageSpacing="10px">
+                                    </Header>
+                                </Styles>
+                                <StylesEditors>
+                                    <CalendarHeader Spacing="11px">
+                                    </CalendarHeader>
+                                    <ProgressBar Height="25px">
+                                    </ProgressBar>
+                                </StylesEditors>
+                            </dx:ASPxGridView>
+                        </DetailRow>
+                    </Templates>
+                </dx:ASPxGridView>
+                <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
+                    ConnectionString="<%$ ConnectionStrings:PlayConnectionString %>" 
+                    SelectCommand="Play_Pedido_Listar" SelectCommandType="StoredProcedure">
+                    <SelectParameters>
+                        <asp:ControlParameter ControlID="lblFechaInicial" Name="FechaInicio" 
+                            PropertyName="Text" Type="String" />
+                        <asp:ControlParameter ControlID="lblFechaFinal" Name="FechaFin" 
+                            PropertyName="Text" Type="String" />
+                        <asp:ControlParameter ControlID="lblEmpresa" Name="v_RazonSocial" 
+                            PropertyName="Text" Type="String" DefaultValue="%" />
+                        <asp:ControlParameter ControlID="txtPropietario" Name="v_Propietario" 
+                            PropertyName="Text" Type="String" DefaultValue="%" />
+                        <asp:ControlParameter ControlID="txtOrdenServicio" Name="v_NumeroPedido" 
+                            PropertyName="Text" Type="String" DefaultValue="%" />
+                        <asp:ControlParameter ControlID="txtPlaca" Name="v_NroPlaca" 
+                            PropertyName="Text" Type="String" DefaultValue="%" />
+                    </SelectParameters>
+                </asp:SqlDataSource>
+                <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
+                    ConnectionString="<%$ ConnectionStrings:PlayConnectionString %>" 
+                    SelectCommand="Play_DetPedido_Listar" SelectCommandType="StoredProcedure">
+                    <SelectParameters>
+                        <asp:SessionParameter Name="n_IdPedido" SessionField="n_IdPedido" 
+                            Type="Decimal" />
+                    </SelectParameters>
+                </asp:SqlDataSource>
+
+
+                                <br />
+
+
             </asp:Panel>
         </ContentTemplate>
+        <Triggers>
+            <asp:AsyncPostBackTrigger ControlID="btnConsultar" />
+            <asp:AsyncPostBackTrigger ControlID="ASPxGridView1" />
+        </Triggers>
     </asp:UpdatePanel>
 
 </asp:Content>
