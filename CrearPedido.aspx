@@ -165,6 +165,7 @@
                 <div class="toolbar" id="toolbar" runat ="server">
                     <asp:HiddenField ID="hdnValue" runat="server" />
                     <asp:HiddenField ID="hdnPropietario" runat="server" />
+                    <asp:HiddenField ID="hfPedido" runat="server" />
             <table width="100%"><tr><td width="65">
                 
                 <asp:ImageButton ID="btnGuardar" runat="server" ImageUrl="~/images/Guardar.jpg" 
@@ -182,7 +183,9 @@
                    
                     <asp:ImageButton ID="btnAnular" runat="server" ImageUrl="~/images/Anular.jpg" 
                         Visible="False" 
-                        OnClientClick="if (confirm('Seguro de anular?')) { btnAnular.disabled = false; return true; } else { return false; }" />
+                        
+                        OnClientClick="if (confirm('Seguro de anular?')) { btnAnular.disabled = false; return true; } else { return false; }" 
+                        onclick="btnAnular_Click" />
                    
                 </td>
                 <td width="65">

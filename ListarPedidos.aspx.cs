@@ -44,19 +44,19 @@ public partial class ListarPedidos : System.Web.UI.Page
         {
             DataTable dtAlmacen = new DataTable();
             dtAlmacen = (DataTable)Session["dtAlmacenes"];
-            ddlAlmacen.DataSource = dtAlmacen;
-            ddlAlmacen.DataTextField = "v_Descripcion";
-            ddlAlmacen.DataValueField = "n_IdAlmacen";
-            ddlAlmacen.DataBind();
+            ddlEmpresa.DataSource = dtAlmacen;
+            ddlEmpresa.DataTextField = "v_Descripcion";
+            ddlEmpresa.DataValueField = "n_IdAlmacen";
+            ddlEmpresa.DataBind();
             //ddlAlmacen.Items.Insert(0, "TODOS");
-            ddlAlmacen.SelectedIndex = 0;
+            ddlEmpresa.SelectedIndex = 0;
             if (dtAlmacen.Rows.Count >= 1)
             {
-                ddlAlmacen.Enabled = true;
+                ddlEmpresa.Enabled = true;
             }
             else
             {
-                ddlAlmacen.Enabled = false;
+                ddlEmpresa.Enabled = false;
             }
         }
         else

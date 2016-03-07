@@ -1255,4 +1255,45 @@ public partial class CrearPedido : System.Web.UI.Page
         vuelto = pago - total;
         lblVuelto.Text = vuelto.ToString("N2");
     }
+
+    protected void btnAnular_Click(object sender, ImageClickEventArgs e)
+    {
+        if (Session["dtUsuario"] != null)
+        {
+            DataTable dtUsuario = new DataTable();
+            dtUsuario = (DataTable)Session["dtUsuario"];
+            string n_IdUsuario = dtUsuario.Rows[0]["n_IdUsuario"].ToString();
+
+            //Validar que no esté amarrado a un comprobante
+            //
+
+            //Anular el pedido
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conexion;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "Play_Pedido_Anular";
+                cmd.Parameters.AddWithValue("@n_IdPedido", hfPedido.Value);
+                cmd.Parameters.AddWithValue("@n_IdUsuarioAnula", n_IdUsuario);
+                conexion.Open();
+                cmd.ExecuteNonQuery();
+                conexion.Close();
+
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.notice({ message: 'Orden de servicio anulada correctamente.' });</script>", false);
+                TabContainer1.Enabled = false;
+                btnAnular.Enabled = false;
+                btnImprimir.Enabled = false;
+                btnGuardar.Enabled = false;
+                Label1.ForeColor = System.Drawing.Color.Red;
+                lblNumeroPedido.ForeColor = System.Drawing.Color.Red;
+                lblEstado.Text = "Anulado";
+                lblEstado.ForeColor = System.Drawing.Color.Red;
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.error({ message: '" + ex.Message + "' });</script>", false);
+            }
+        }
+    }
 }
