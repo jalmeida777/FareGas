@@ -27,6 +27,52 @@ public partial class CrearPedido : System.Web.UI.Page
             ListarCategoria();
             ddlCategoria_SelectedIndexChanged(null, null);
        }
+
+        if (Request.QueryString["n_IdPedido"] != null)
+        {
+            decimal n_IdPedido = decimal.Parse(Request.QueryString["n_IdPedido"].ToString());
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter("Faregas_Pedido_Seleccionar " + n_IdPedido.ToString(), conexion);
+            da.Fill(dt);
+            lblIdPedido.Text = n_IdPedido.ToString();
+            lblNumeroPedido.Text = dt.Rows[0]["v_NumeroPedido"].ToString();
+            txtNumeroCertificado.Text = dt.Rows[0]["v_NumeroCertificado"].ToString();
+            txtNumeroHoja.Text = dt.Rows[0]["v_NumeroHoja"].ToString();
+            txtFechaInicial.Text = dt.Rows[0]["d_FechaEmision"].ToString();
+            ddlFormaPago.SelectedValue = dt.Rows[0]["n_IdFormaPago"].ToString();
+
+            ddlMoneda.SelectedValue = dt.Rows[0]["n_IdMoneda"].ToString();
+            lblSubTotal.Text = dt.Rows[0]["f_SubTotal"].ToString();
+            lblIGV.Text = dt.Rows[0]["f_Impuesto"].ToString();
+            lblTotal.Text = dt.Rows[0]["f_Total"].ToString();
+            txtPago.Text = dt.Rows[0]["f_Pago"].ToString();
+            lblVuelto.Text = dt.Rows[0]["f_Vuelto"].ToString();
+            txtPlaca.Text = dt.Rows[0]["v_NroPlaca"].ToString();
+
+            ddlCategoria.SelectedValue = dt.Rows[0]["i_IdCategoria"].ToString();
+            ddlClase.SelectedValue = dt.Rows[0]["i_IdClaseVehiculo"].ToString();
+            ddlCarroceria.SelectedValue = dt.Rows[0]["i_IdCarroceria"].ToString();
+            txtPotencia.Text = dt.Rows[0]["v_Potencia"].ToString();
+            txtVersion.Text = dt.Rows[0]["v_Version"].ToString();
+            txtAnioFabricacion.Text = dt.Rows[0]["i_Anio"].ToString();
+            txtNumeroSerie.Text = dt.Rows[0]["v_Serie"].ToString();
+            txtNumeroMotor.Text = dt.Rows[0]["v_Motor"].ToString();
+            txtColor.Text = dt.Rows[0]["v_Color"].ToString();
+            txtCilindros.Text = dt.Rows[0]["i_Cilindros"].ToString();
+            txtCilindrada.Text = dt.Rows[0]["f_Cilindrada"].ToString();
+            txtEjes.Text = dt.Rows[0]["i_Ejes"].ToString();
+            txtRuedas.Text = dt.Rows[0]["i_Ruedas"].ToString();
+            txtAsientos.Text = dt.Rows[0]["i_Asientos"].ToString();
+            txtPasajeros.Text = dt.Rows[0]["i_Pasajeros"].ToString();
+            txtLongitud.Text = dt.Rows[0]["f_Largo"].ToString();
+            txtAncho.Text = dt.Rows[0]["f_Ancho"].ToString();
+            txtAltura.Text = dt.Rows[0]["f_Alto"].ToString();
+            
+            
+        }
+        else
+        {
+        }
     }
 
     public void ListarFormaPago()

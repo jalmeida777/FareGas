@@ -281,7 +281,7 @@
             <td>
                 &nbsp;</td>
             <td colspan="4" width="100%">
-                <cc1:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="0" 
+                <cc1:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="1" 
                     Width="100%" CssClass="MyTabStyle" Visible="true">
                     
                     <cc1:TabPanel ID="TabPanel2" runat="server" HeaderText="TabPanel1" Visible="true">
