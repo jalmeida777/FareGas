@@ -25,31 +25,41 @@ public partial class CrearPedido : System.Web.UI.Page
             ListarCombustible();
             ListarClaseVehiculo();
             ListarCategoria();
+            ListarMarcas();
+            ddlMarca_SelectedIndexChanged(null, null);
             ddlCategoria_SelectedIndexChanged(null, null);
        }
 
         if (Request.QueryString["n_IdPedido"] != null)
         {
-            decimal n_IdPedido = decimal.Parse(Request.QueryString["n_IdPedido"].ToString());
+            decimal n_IdPedido = decimal.Parse(Request.QueryString["n_IdPedido"]);
+            hfPedido.Value = n_IdPedido.ToString();
             DataTable dt = new DataTable();
-            SqlDataAdapter da = new SqlDataAdapter("Faregas_Pedido_Seleccionar " + n_IdPedido.ToString(), conexion);
+            SqlDataAdapter da = new SqlDataAdapter("Faregas_Pedido_Seleccionar " + n_IdPedido, conexion);
             da.Fill(dt);
+            ddlEmpresa.SelectedValue = dt.Rows[0]["i_IdEmpresa"].ToString();
+            btnVerificarEmpresa_Click(null, null);
             lblIdPedido.Text = n_IdPedido.ToString();
             lblNumeroPedido.Text = dt.Rows[0]["v_NumeroPedido"].ToString();
             txtNumeroCertificado.Text = dt.Rows[0]["v_NumeroCertificado"].ToString();
             txtNumeroHoja.Text = dt.Rows[0]["v_NumeroHoja"].ToString();
-            txtFechaInicial.Text = dt.Rows[0]["d_FechaEmision"].ToString();
+            txtFechaInicial.Text = DateTime.Parse(dt.Rows[0]["d_FechaEmision"].ToString()).ToShortDateString();
             ddlFormaPago.SelectedValue = dt.Rows[0]["n_IdFormaPago"].ToString();
 
             ddlMoneda.SelectedValue = dt.Rows[0]["n_IdMoneda"].ToString();
-            lblSubTotal.Text = dt.Rows[0]["f_SubTotal"].ToString();
-            lblIGV.Text = dt.Rows[0]["f_Impuesto"].ToString();
-            lblTotal.Text = dt.Rows[0]["f_Total"].ToString();
-            txtPago.Text = dt.Rows[0]["f_Pago"].ToString();
-            lblVuelto.Text = dt.Rows[0]["f_Vuelto"].ToString();
+            lblSubTotal.Text = double.Parse(dt.Rows[0]["f_SubTotal"].ToString()).ToString("N2");
+            lblIGV.Text = double.Parse(dt.Rows[0]["f_Impuesto"].ToString()).ToString("N2");
+            lblTotal.Text = double.Parse(dt.Rows[0]["f_Total"].ToString()).ToString("N2");
+            txtPago.Text = double.Parse(dt.Rows[0]["f_Pago"].ToString()).ToString("N2");
+            lblVuelto.Text = double.Parse(dt.Rows[0]["f_Vuelto"].ToString()).ToString("N2");
             txtPlaca.Text = dt.Rows[0]["v_NroPlaca"].ToString();
 
             ddlCategoria.SelectedValue = dt.Rows[0]["i_IdCategoria"].ToString();
+            ddlMarca.SelectedValue = dt.Rows[0]["i_IdMarca"].ToString();
+            ddlMarca_SelectedIndexChanged(null, null);
+            ddlModelo.SelectedValue = dt.Rows[0]["i_IdModelo"].ToString();
+            
+            ddlCategoria_SelectedIndexChanged(null, null);
             ddlClase.SelectedValue = dt.Rows[0]["i_IdClaseVehiculo"].ToString();
             ddlCarroceria.SelectedValue = dt.Rows[0]["i_IdCarroceria"].ToString();
             txtPotencia.Text = dt.Rows[0]["v_Potencia"].ToString();
@@ -64,14 +74,61 @@ public partial class CrearPedido : System.Web.UI.Page
             txtRuedas.Text = dt.Rows[0]["i_Ruedas"].ToString();
             txtAsientos.Text = dt.Rows[0]["i_Asientos"].ToString();
             txtPasajeros.Text = dt.Rows[0]["i_Pasajeros"].ToString();
-            txtLongitud.Text = dt.Rows[0]["f_Largo"].ToString();
-            txtAncho.Text = dt.Rows[0]["f_Ancho"].ToString();
-            txtAltura.Text = dt.Rows[0]["f_Alto"].ToString();
-            
-            
-        }
-        else
-        {
+
+            txtLongitud.Text = double.Parse(dt.Rows[0]["f_Largo"].ToString()).ToString("N2");
+            txtAncho.Text = double.Parse(dt.Rows[0]["f_Ancho"].ToString()).ToString("N2");
+            txtAltura.Text = double.Parse(dt.Rows[0]["f_Alto"].ToString()).ToString("N2");
+
+            ddlCombustibleInicial.SelectedValue = dt.Rows[0]["i_IdCombustible"].ToString();
+            txtPesoSecoInicial.Text = dt.Rows[0]["i_PesoNetoInicial"].ToString();
+            txtCargaUtilInicial.Text = dt.Rows[0]["i_CargaUtilInicial"].ToString();
+            txtPesoBrutoInicial.Text = dt.Rows[0]["i_PesoBrutoInicial"].ToString();
+
+            txtObservacion.Text = dt.Rows[0]["t_Obs"].ToString();
+            txtNumeroHojaInicial.Text = dt.Rows[0]["v_RangoHojasInicial"].ToString();
+            txtNumeroHojaFinal.Text = dt.Rows[0]["v_RangoHojasFinal"].ToString();
+
+            bool Estado = bool.Parse(dt.Rows[0]["b_Estado"].ToString());
+            if (Estado == true)
+            {
+                lblEstado.Text = "Registrado";
+                lblEstado.ForeColor = System.Drawing.Color.Green;
+                btnGuardar.Visible = true;
+                btnAnular.Visible = true;
+                btnImprimir.Visible = true;
+            }
+            else 
+            {
+                lblEstado.Text = "Anulado";
+                lblEstado.ForeColor = System.Drawing.Color.Red;
+                btnGuardar.Visible = false;
+                btnAnular.Visible = false;
+                btnImprimir.Visible = false;
+                Label1.ForeColor = System.Drawing.Color.Red;
+                lblNumeroPedido.ForeColor = System.Drawing.Color.Red;
+                TabContainer1.Enabled = false;
+            }
+            panelServicio.Visible = false;
+            tblCliente1.Visible = false;
+            tblCliente2.Visible = true;
+            btnCliente.Visible = false;
+            lblNombreCliente.Text = dt.Rows[0]["Cliente"].ToString();
+            rblTipoComprobante.Enabled = false;
+
+            txtNumeroDocumentoPropietario.Text = dt.Rows[0]["v_DocumentoIdentidad"].ToString();
+            btnVerificarPropietario_Click(null, null);
+
+            DataTable dtDetalle = new DataTable();
+            SqlDataAdapter daDetalle = new SqlDataAdapter("Play_DetPedido_Listar " + n_IdPedido, conexion);
+            daDetalle.Fill(dtDetalle);
+            gv.DataSource = dtDetalle;
+            gv.DataBind();
+
+
+            rblTipoComprobante.SelectedValue = dt.Rows[0]["v_TipoDocumento"].ToString();
+            lblUsuarioRegistro.Text = dt.Rows[0]["Usuario"].ToString();
+            lblFechaRegistro.Text = dt.Rows[0]["d_FechaRegistra"].ToString();
+            ibUsuarioRegistro.ImageUrl = dt.Rows[0]["v_RutaFoto"].ToString();
         }
     }
 
@@ -122,12 +179,6 @@ public partial class CrearPedido : System.Web.UI.Page
         ddlCombustibleInicial.DataValueField = "i_IdCombustible";
         ddlCombustibleInicial.DataBind();
         ddlCombustibleInicial.SelectedIndex = 0;
-
-        ddlCombustibleFinal.DataSource = dt;
-        ddlCombustibleFinal.DataTextField = "v_NombreCombustible";
-        ddlCombustibleFinal.DataValueField = "i_IdCombustible";
-        ddlCombustibleFinal.DataBind();
-        ddlCombustibleFinal.SelectedIndex = 0;
     }
 
     public void ListarClaseVehiculo()
@@ -220,16 +271,6 @@ public partial class CrearPedido : System.Web.UI.Page
         {
             ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.warning({ message: 'Debe ingresar el año de fabricación.' });</script>", false);
             txtAnioFabricacion.Focus();
-            return;
-        }
-        if (hfMarca.Value == "") 
-        {
-            ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.warning({ message: 'Debe ingresar la marca del vehículo.' });</script>", false);
-            return;
-        }
-        if (hfModelo.Value == "") 
-        {
-            ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.warning({ message: 'Debe ingresar el modelo del vehículo.' });</script>", false);
             return;
         }
         if (txtNumeroSerie.Text == "") 
@@ -434,8 +475,8 @@ public partial class CrearPedido : System.Web.UI.Page
                 cmd.Parameters.AddWithValue("@f_Vuelto", double.Parse(lblVuelto.Text));
                 cmd.Parameters.AddWithValue("@v_NroPlaca", txtPlaca.Text.Trim().ToUpper());
                 cmd.Parameters.AddWithValue("@i_IdCategoria", ddlCategoria.SelectedValue);
-                cmd.Parameters.AddWithValue("@i_IdMarca", hfMarca.Value);
-                cmd.Parameters.AddWithValue("@i_IdModelo", hfModelo.Value);
+                cmd.Parameters.AddWithValue("@i_IdMarca", ddlMarca.SelectedValue);
+                cmd.Parameters.AddWithValue("@i_IdModelo", ddlModelo.SelectedValue);
                 cmd.Parameters.AddWithValue("@i_IdClaseVehiculo", ddlClase.SelectedValue);
                 cmd.Parameters.AddWithValue("@i_IdCarroceria", ddlCarroceria.SelectedValue);
                 cmd.Parameters.AddWithValue("@v_Potencia", txtPotencia.Text.Trim().ToUpper());
@@ -456,40 +497,9 @@ public partial class CrearPedido : System.Web.UI.Page
                 cmd.Parameters.AddWithValue("@i_IdCombustible", ddlCombustibleInicial.SelectedValue);
 
                 cmd.Parameters.AddWithValue("@i_PesoNetoInicial", int.Parse(txtPesoSecoInicial.Text));
-
-                if (txtPesoSecoFinal.Text == "")
-                {
-                    cmd.Parameters.AddWithValue("@i_PesoNetoFinal", 0);
-                    txtPesoSecoFinal.Text = "0";
-                }
-                else
-                {
-                    cmd.Parameters.AddWithValue("@i_PesoNetoFinal", int.Parse(txtPesoSecoFinal.Text));
-                }
-
                 cmd.Parameters.AddWithValue("@i_PesoBrutoInicial", int.Parse(txtPesoBrutoInicial.Text));
-
-                if (txtPesoBrutoFinal.Text == "")
-                {
-                    cmd.Parameters.AddWithValue("@i_PesoBrutoFinal", 0);
-                    txtPesoBrutoFinal.Text = "0";
-                }
-                else
-                {
-                    cmd.Parameters.AddWithValue("@i_PesoBrutoFinal", int.Parse(txtPesoBrutoFinal.Text));
-                }
-
                 cmd.Parameters.AddWithValue("@i_CargaUtilInicial", int.Parse(txtCargaUtilInicial.Text));
-
-                if (txtCargaUtilFinal.Text == "")
-                {
-                    cmd.Parameters.AddWithValue("@i_CargaUtilFinal", 0);
-                    txtCargaUtilFinal.Text = "0";
-                }
-                else
-                {
-                    cmd.Parameters.AddWithValue("@i_CargaUtilFinal", int.Parse(txtCargaUtilFinal.Text));
-                }
+                
                 cmd.Parameters.AddWithValue("@v_Propietario", txtNombrePropietario.Text.Trim().ToUpper());
                 cmd.Parameters.AddWithValue("@n_IdUsuarioRegistra", n_IdUsuario);
                 cmd.Parameters.AddWithValue("@t_Obs", txtObservacion.Text);
@@ -497,6 +507,7 @@ public partial class CrearPedido : System.Web.UI.Page
                 cmd.Parameters.AddWithValue("@v_RangoHojasFinal", txtNumeroHojaFinal.Text.Trim().ToUpper());
                 cmd.Parameters.AddWithValue("@i_IdPropietario", hdnPropietario.Value);
                 cmd.Parameters.AddWithValue("@i_IdCliente", hdnValue.Value);
+                cmd.Parameters.AddWithValue("@v_TipoDocumento", rblTipoComprobante.SelectedValue);
                 string n_IdPedido = cmd.ExecuteScalar().ToString();
                 cmd.Dispose();
 
@@ -553,9 +564,10 @@ public partial class CrearPedido : System.Web.UI.Page
                 lblFechaRegistro.Text = DateTime.Now.ToShortDateString();
                 lblUsuarioRegistro.Text = Usuario;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 tran.Rollback();
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.error({ message: '" + ex.Message + "' });</script>", false);
             }
             finally 
             {
@@ -1042,112 +1054,29 @@ public partial class CrearPedido : System.Web.UI.Page
         ListarCarrocerias();
     }
 
-    [System.Web.Script.Services.ScriptMethod()]
-    [System.Web.Services.WebMethod]
-    public static List<string> BuscarMarcas(string prefixText, int count)
+    void ListarMarcas() 
     {
-        using (SqlConnection conn = new SqlConnection())
-        {
-            conn.ConnectionString = ConfigurationManager.ConnectionStrings["conexion"].ConnectionString;
-            using (SqlCommand cmd = new SqlCommand())
-            {
-                cmd.CommandText = "select i_IdMarca,v_NombreMarca from marca where b_Estado = 1 and v_NombreMarca like @SearchText + '%'order by v_NombreMarca";
-                cmd.Parameters.AddWithValue("@SearchText", prefixText);
-                cmd.Connection = conn;
-                conn.Open();
-                List<string> categorias = new List<string>();
-                using (SqlDataReader sdr = cmd.ExecuteReader())
-                {
-                    while (sdr.Read())
-                    {
-                        categorias.Add(AjaxControlToolkit.AutoCompleteExtender.CreateAutoCompleteItem(sdr["v_NombreMarca"].ToString(), Convert.ToString(sdr["i_IdMarca"].ToString())));
-                    }
-                }
-                conn.Close();
-                //if (productos.Count == 0)
-                //{
-                //categorias.Add(AjaxControlToolkit.AutoCompleteExtender.CreateAutoCompleteItem("Crear '" + prefixText + "'", "*"));
-                //categorias.Add(AjaxControlToolkit.AutoCompleteExtender.CreateAutoCompleteItem("Crear y Editar ... '" + prefixText + "'", "%"));
-                //}
-
-
-                return categorias;
-            }
-        }
+        DataTable dt = new DataTable();
+        SqlDataAdapter da = new SqlDataAdapter("select i_IdMarca,v_NombreMarca from marca where b_Estado = 1 order by v_NombreMarca", conexion);
+        da.Fill(dt);
+        ddlMarca.DataSource = dt;
+        ddlMarca.DataTextField = "v_NombreMarca";
+        ddlMarca.DataValueField = "i_IdMarca";
+        ddlMarca.DataBind();
     }
 
-    [System.Web.Script.Services.ScriptMethod()]
-    [System.Web.Services.WebMethod]
-    public static List<string> BuscarModelos(string prefixText, int count, string contextKey)
+    void ListarModelos() 
     {
-        using (SqlConnection conn = new SqlConnection())
-        {
-
-            conn.ConnectionString = ConfigurationManager.ConnectionStrings["conexion"].ConnectionString;
-            using (SqlCommand cmd = new SqlCommand())
-            {
-                cmd.CommandText = "select i_IdModelo,v_NombreModelo from modelo where b_Estado = 1 and i_IdMarca=" + contextKey + " and v_NombreModelo like @SearchText + '%' order by v_NombreModelo";
-                cmd.Parameters.AddWithValue("@SearchText", prefixText);
-                cmd.Connection = conn;
-                conn.Open();
-                List<string> categorias = new List<string>();
-                using (SqlDataReader sdr = cmd.ExecuteReader())
-                {
-                    while (sdr.Read())
-                    {
-                        categorias.Add(AjaxControlToolkit.AutoCompleteExtender.CreateAutoCompleteItem(sdr["v_NombreModelo"].ToString(), Convert.ToString(sdr["i_IdModelo"].ToString())));
-                    }
-                }
-                conn.Close();
-                //if (productos.Count == 0)
-                //{
-                //categorias.Add(AjaxControlToolkit.AutoCompleteExtender.CreateAutoCompleteItem("Crear '" + prefixText + "'", "*"));
-                //categorias.Add(AjaxControlToolkit.AutoCompleteExtender.CreateAutoCompleteItem("Crear y Editar ... '" + prefixText + "'", "%"));
-                //}
-
-
-                return categorias;
-            }
-        }
+        string i_IdMarca = ddlMarca.SelectedValue;
+        DataTable dt = new DataTable();
+        SqlDataAdapter da = new SqlDataAdapter("select i_IdModelo,v_NombreModelo from modelo where b_Estado = 1 and i_IdMarca=" + i_IdMarca + " order by v_NombreModelo", conexion);
+        da.Fill(dt);
+        ddlModelo.DataSource = dt;
+        ddlModelo.DataTextField = "v_NombreModelo";
+        ddlModelo.DataValueField = "i_IdModelo";
+        ddlModelo.DataBind();
     }
 
-    protected void hfMarca_ValueChanged(object sender, EventArgs e)
-    {
-        string selectedWidgetID = ((HiddenField)sender).Value;
-        txtMarca.Enabled = false;
-        btnEditarMarca.Visible = true;
-        txtMarca.BackColor = System.Drawing.Color.FromName("#CEE7FF");
-        txtModelo_AutoCompleteExtender.ContextKey = selectedWidgetID;
-        txtModelo.Enabled = true;
-        btnEditarModelo.Visible = false;
-        txtModelo.Text = "";
-        hfModelo.Value = "0";
-        btnNuevoModelo.Visible = true;
-        btnNuevaMarca.Visible = false;
-        txtModelo.Focus();
-    }
-
-    protected void btnEditarMarca_Click(object sender, ImageClickEventArgs e)
-    {
-        txtMarca.Enabled = true;
-        btnEditarMarca.Visible = false;
-    }
-
-    protected void hfModelo_ValueChanged(object sender, EventArgs e)
-    {
-        txtModelo.Enabled = false;
-        btnEditarModelo.Visible = true;
-        btnNuevoModelo.Visible = false;
-        txtModelo.BackColor = System.Drawing.Color.FromName("#CEE7FF");
-        if (hfMarca.Value != "") { txtMarca.BackColor = System.Drawing.Color.FromName("#CEE7FF"); }
-        txtAnioFabricacion.Focus();
-    }
-
-    protected void btnEditarModelo_Click(object sender, ImageClickEventArgs e)
-    {
-        txtModelo.Enabled = true;
-        btnEditarModelo.Visible = false;
-    }
 
     protected void btnNuevaMarca_Click(object sender, ImageClickEventArgs e)
     {
@@ -1195,6 +1124,8 @@ public partial class CrearPedido : System.Web.UI.Page
                     conexion.Close();
                     ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.notice({ message: 'Marca registrada correctamente.' });</script>", false);
                     txtDescripcionMarca.Text = "";
+                    ListarMarcas();
+                    ddlMarca_SelectedIndexChanged(null, null);
                     //Cerrar
                     tblMarca.Visible = false;
                     tblGeneral.Visible = true;
@@ -1217,12 +1148,6 @@ public partial class CrearPedido : System.Web.UI.Page
 
     protected void btnNuevoModelo_Click(object sender, ImageClickEventArgs e)
     {
-        if (hfMarca.Value == "")
-        {
-            ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.warning({ message: 'Debe seleccionar una marca.' });</script>", false);
-            txtMarca.Focus();
-            return;
-        }
 
         tblModelo.Visible = true;
         tblGeneral.Visible = false;
@@ -1241,7 +1166,7 @@ public partial class CrearPedido : System.Web.UI.Page
 
         try
         {
-                int IdMarca = int.Parse(hfMarca.Value);
+                int IdMarca = int.Parse(ddlMarca.SelectedValue);
 
                 //Verificar existencia
                 DataTable dtModelo = new DataTable();
@@ -1270,6 +1195,7 @@ public partial class CrearPedido : System.Web.UI.Page
                     conexion.Close();
                     txtDescripcionModelo.Text = "";
                     ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.notice({ message: 'Modelo registrado correctamente.' });</script>", false);
+                    ListarModelos();
                     //Cerrar
                     tblModelo.Visible = false;
                     tblGeneral.Visible = true;
@@ -1351,5 +1277,10 @@ public partial class CrearPedido : System.Web.UI.Page
         Session.Remove("Detalle");
         int i_IdMenu = int.Parse(Request.QueryString["IdMenu"]);
         Response.Redirect("CrearPedido.aspx?IdMenu=" + i_IdMenu);
+    }
+
+    protected void ddlMarca_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        ListarModelos();
     }
 }

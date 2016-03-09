@@ -20,17 +20,6 @@
         __doPostBack(hdnPropietarioID, "");
     }
 
-    function OnMarcaSeleccionado(source, eventArgs) {
-        var hdnValueID = "<%= hfMarca.ClientID %>";
-        document.getElementById(hdnValueID).value = eventArgs.get_value();
-        __doPostBack(hdnValueID, "");
-    }
-
-    function OnModeloSeleccionado(source, eventArgs) {
-        var hdnValueID = "<%= hfModelo.ClientID %>";
-        document.getElementById(hdnValueID).value = eventArgs.get_value();
-        __doPostBack(hdnValueID, "");
-    }
 
 </script>
 
@@ -64,18 +53,7 @@
         document.getElementById(idpbi).value = resultadoi;
 
 
-        var idpsf = "<%= txtPesoSecoFinal.ClientID %>";
-        var psf = document.getElementById(idpsf).value;
-        if (psf == "") { psf = 0; }
 
-        var idcuf = "<%= txtCargaUtilFinal.ClientID %>";
-        var cuf = document.getElementById(idcuf).value;
-        if (cuf == "") { cuf = 0; }
-
-        var resultadof = parseInt(psf) + parseInt(cuf);
-
-        var idpbf = "<%= txtPesoBrutoFinal.ClientID %>";
-        document.getElementById(idpbf).value = resultadof;
 
     }
 
@@ -148,11 +126,7 @@
        {
         width: 150px !important;   
        }
-      .style1
-      {
-          width: 100%;
-      }
- body *
+      body *
 {
 	text-shadow: none;
 }
@@ -344,7 +318,7 @@
                         </td>
                         <td style="padding-left: 5px">
                             <asp:TextBox ID="txtFechaInicial" runat="server" CssClass="inputsFecha" 
-                                MaxLength="10"></asp:TextBox>
+                                MaxLength="10" Enabled="False"></asp:TextBox>
                             <cc1:CalendarExtender ID="CalendarExtender1" runat="server" Enabled="True" 
                                 Format="dd/MM/yyyy" TargetControlID="txtFechaInicial">
                             </cc1:CalendarExtender>
@@ -601,7 +575,7 @@
                     </tr>
                     <tr>
                         <td colspan="4">
-                            <table width="300">
+                            <table width="500">
                                 <tr>
                                     <td rowspan="2" width="60">
                                         <asp:ImageButton ID="ibUsuarioRegistro" runat="server" Height="50px" 
@@ -720,28 +694,10 @@
                             <table cellpadding="0" cellspacing="0">
                                 <tr>
                                     <td width="210">
-                                    <asp:UpdatePanel ID="UpdatePanel3" runat="server">
-                            <ContentTemplate>
-                                        <asp:TextBox ID="txtMarca" runat="server" CssClass="inputNormal" Width="200px"></asp:TextBox>
-                                        <cc1:AutoCompleteExtender ID="txtMarca_AutoCompleteExtender" runat="server" 
-                                            CompletionInterval="100" CompletionListCssClass="AutoExtender" 
-                                            CompletionListHighlightedItemCssClass="AutoExtenderHighlight" 
-                                            CompletionListItemCssClass="AutoExtenderList" DelimiterCharacters="" 
-                                            Enabled="True" MinimumPrefixLength="2" 
-                                            OnClientItemSelected="OnMarcaSeleccionado" ServiceMethod="BuscarMarcas" 
-                                            ServicePath="" ShowOnlyCurrentWordInCompletionListItem="True" 
-                                            TargetControlID="txtMarca">
-                                        </cc1:AutoCompleteExtender>
-                                        <asp:HiddenField ID="hfMarca" runat="server" 
-                                OnValueChanged="hfMarca_ValueChanged" />
-                                              </ContentTemplate>
-                                </asp:UpdatePanel>
-                                    </td>
-                                    <td width="15">
-                                        <asp:ImageButton ID="btnEditarMarca" runat="server" 
-                                            ImageUrl="~/images/edit.png" OnClick="btnEditarMarca_Click" 
-                                            ToolTip="Editar Marca" Visible="False" CausesValidation="False" 
-                                            ClientIDMode="Static" />
+                                        <asp:DropDownList ID="ddlMarca" runat="server" AutoPostBack="True" 
+                                            CssClass="combo" onselectedindexchanged="ddlMarca_SelectedIndexChanged" 
+                                            Width="200px">
+                                        </asp:DropDownList>
                                     </td>
                                     <td align="left" width="20">
                                         <asp:UpdatePanel ID="UpdatePanel5" runat="server">
@@ -784,33 +740,14 @@
                             <table cellpadding="0" cellspacing="0">
                                 <tr>
                                     <td width="210">
-                                    <asp:UpdatePanel ID="UpdatePanel4" runat="server">
-                            <ContentTemplate>
-                                        <asp:TextBox ID="txtModelo" runat="server" CssClass="inputNormal" Width="200px"></asp:TextBox>
-                                        <cc1:AutoCompleteExtender ID="txtModelo_AutoCompleteExtender" runat="server" 
-                                            CompletionInterval="100" CompletionListCssClass="AutoExtender" 
-                                            CompletionListHighlightedItemCssClass="AutoExtenderHighlight" 
-                                            CompletionListItemCssClass="AutoExtenderList" DelimiterCharacters="" 
-                                            Enabled="True" OnClientItemSelected="OnModeloSeleccionado" 
-                                            ServiceMethod="BuscarModelos" ServicePath="" 
-                                            ShowOnlyCurrentWordInCompletionListItem="True" TargetControlID="txtModelo" 
-                                            UseContextKey="True">
-                                        </cc1:AutoCompleteExtender>
-                                        <asp:HiddenField ID="hfModelo" runat="server" 
-                                OnValueChanged="hfModelo_ValueChanged" />
-                                        </ContentTemplate>
-                            </asp:UpdatePanel>
-                                    </td>
-                                    <td width="15">
-                                        <asp:ImageButton ID="btnEditarModelo" runat="server" 
-                                            ImageUrl="~/images/edit.png" OnClick="btnEditarModelo_Click" 
-                                            ToolTip="Editar Modelo" Visible="False" ClientIDMode="Static" />
+                                        <asp:DropDownList ID="ddlModelo" runat="server" CssClass="combo" Width="200px">
+                                        </asp:DropDownList>
                                     </td>
                                     <td align="left" width="20">
                                         <asp:UpdatePanel ID="UpdatePanel6" runat="server">
                                         <ContentTemplate>
                                         <asp:ImageButton ID="btnNuevoModelo" runat="server" ImageUrl="~/images/add.png" 
-                                            OnClick="btnNuevoModelo_Click" ToolTip="Nuevo Modelo" Visible="False" />
+                                            OnClick="btnNuevoModelo_Click" ToolTip="Nuevo Modelo" />
                                             </ContentTemplate>
                                             <Triggers>
                                                 <asp:PostBackTrigger ControlID="btnNuevoModelo" />
@@ -940,17 +877,11 @@
                                 MaxLength="2" onkeypress="return ValidaNumeros(event);" 
                                 Width="80px"></asp:TextBox>
                         </td>
-                        <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933; width: 150px; padding-left: 10px;">
+                        <td>
                             
-                            <asp:Label ID="Label148" runat="server" Text="Combustible Final:"></asp:Label>
-                            <asp:Label ID="Label176" runat="server" Font-Bold="True" Font-Size="10pt" 
-                                ForeColor="#18AC85" Text="*"></asp:Label>
                         </td>
                         <td class="tdDatos" style="padding-left: 5px">
-                            <asp:DropDownList ID="ddlCombustibleFinal" runat="server" CssClass="combo" 
-                                Width="200px">
-                            </asp:DropDownList>
-                        </td>
+                            &nbsp;</td>
                     </tr>
                     <tr>
                         <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933; width: 150px; padding-left: 10px;">
@@ -1056,34 +987,6 @@
                         </td>
                     </tr>
                     <tr>
-                        <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933; width: 150px; padding-left: 10px;">
-                            
-                            <asp:Label ID="Label145" runat="server" Text="Peso Seco Final (kg):"></asp:Label>
-                        </td>
-                        <td class="tdDatos" style="padding-left: 5px">
-                            <asp:TextBox ID="txtPesoSecoFinal" runat="server" CssClass="inputNormal" 
-                                MaxLength="5" onkeypress="return ValidaNumeros(event);" onkeyup="PesoBruto();" 
-                                Width="80px"></asp:TextBox>
-                        </td>
-                        <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933; width: 150px; padding-left: 10px;">
-                            
-                            <asp:Label ID="Label146" runat="server" Text="Carga Util Final (kg):"></asp:Label>
-                        </td>
-                        <td class="tdDatos" style="padding-left: 5px">
-                            <asp:TextBox ID="txtCargaUtilFinal" runat="server" CssClass="inputNormal" 
-                                MaxLength="5" onkeypress="return ValidaNumeros(event);" onkeyup="PesoBruto();" 
-                                Width="80px"></asp:TextBox>
-                        </td>
-                        <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933; width: 150px; padding-left: 10px;">
-                            
-                            <asp:Label ID="Label147" runat="server" Text="Peso Bruto Final (kg):"></asp:Label>
-                        </td>
-                        <td class="tdDatos" style="padding-left: 5px">
-                            <asp:TextBox ID="txtPesoBrutoFinal" runat="server" CssClass="inputNormal" 
-                                MaxLength="5" onkeypress="return ValidaNumeros(event);" Width="80px"></asp:TextBox>
-                        </td>
-                    </tr>
-                    <tr>
                         <td>
                             &nbsp;</td>
                         <td class="tdDatos" style="padding-left: 5px">
@@ -1123,7 +1026,7 @@
                                 ForeColor="#18AC85" Text="*"></asp:Label>
                         </td>
                         <td class="tdDatos">
-                            <table class="style1">
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                 <tr>
                                     <td width="110">
                                         <asp:TextBox ID="txtNumeroDocumentoPropietario" runat="server" 
