@@ -166,7 +166,8 @@
                 <td width="65">
                    
                     <asp:ImageButton ID="btnImprimir" runat="server" 
-                        ImageUrl="~/images/Imprimir.jpg" Visible="False" />
+                        ImageUrl="~/images/Imprimir.jpg" Visible="False" 
+                        onclick="btnImprimir_Click" />
 
                         <cc1:ConfirmButtonExtender ID="ConfirmButtonExtender3" runat="server" 
                     ConfirmText="¿Seguro de imprimir?" Enabled="True" 
@@ -255,7 +256,7 @@
             <td>
                 &nbsp;</td>
             <td colspan="4" width="100%">
-                <cc1:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="1" 
+                <cc1:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="0" 
                     Width="100%" CssClass="MyTabStyle" Visible="true">
                     
                     <cc1:TabPanel ID="TabPanel2" runat="server" HeaderText="TabPanel1" Visible="true">

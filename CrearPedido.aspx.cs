@@ -123,7 +123,7 @@ public partial class CrearPedido : System.Web.UI.Page
             daDetalle.Fill(dtDetalle);
             gv.DataSource = dtDetalle;
             gv.DataBind();
-
+            gv.Enabled = false;
 
             rblTipoComprobante.SelectedValue = dt.Rows[0]["v_TipoDocumento"].ToString();
             lblUsuarioRegistro.Text = dt.Rows[0]["Usuario"].ToString();
@@ -1282,5 +1282,11 @@ public partial class CrearPedido : System.Web.UI.Page
     protected void ddlMarca_SelectedIndexChanged(object sender, EventArgs e)
     {
         ListarModelos();
+    }
+
+    protected void btnImprimir_Click(object sender, ImageClickEventArgs e)
+    {
+        int i_IdMenu = int.Parse(Request.QueryString["IdMenu"]);
+        Response.Redirect("~/ImprimirPedido.aspx?n_IdPedido=" + hfPedido.Value + "&IdMenu=" + i_IdMenu);
     }
 }
