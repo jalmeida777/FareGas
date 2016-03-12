@@ -88,14 +88,18 @@ public partial class CrearPedido : System.Web.UI.Page
             txtNumeroHojaInicial.Text = dt.Rows[0]["v_RangoHojasInicial"].ToString();
             txtNumeroHojaFinal.Text = dt.Rows[0]["v_RangoHojasFinal"].ToString();
 
+            string i_IdComprobante = dt.Rows[0]["i_IdComprobante"].ToString();
+            
+
             bool Estado = bool.Parse(dt.Rows[0]["b_Estado"].ToString());
             if (Estado == true)
             {
                 lblEstado.Text = "Registrado";
                 lblEstado.ForeColor = System.Drawing.Color.Green;
-                btnGuardar.Visible = true;
+                btnGuardar.Visible = false;
                 btnAnular.Visible = true;
                 btnImprimir.Visible = true;
+                btnGenerarComprobante.Enabled = true;
             }
             else 
             {
@@ -107,7 +111,18 @@ public partial class CrearPedido : System.Web.UI.Page
                 Label1.ForeColor = System.Drawing.Color.Red;
                 lblNumeroPedido.ForeColor = System.Drawing.Color.Red;
                 TabContainer1.Enabled = false;
+                btnGenerarComprobante.Enabled = false;
             }
+
+            if (i_IdComprobante == "")
+            {
+                btnGenerarComprobante.Enabled = true;
+            }
+            else 
+            {
+                btnGenerarComprobante.Enabled = false;
+            }
+
             panelServicio.Visible = false;
             tblCliente1.Visible = false;
             tblCliente2.Visible = true;
@@ -509,6 +524,7 @@ public partial class CrearPedido : System.Web.UI.Page
                 cmd.Parameters.AddWithValue("@i_IdCliente", hdnValue.Value);
                 cmd.Parameters.AddWithValue("@v_TipoDocumento", rblTipoComprobante.SelectedValue);
                 string n_IdPedido = cmd.ExecuteScalar().ToString();
+                hfPedido.Value = n_IdPedido;
                 cmd.Dispose();
 
                 //Obtener el número del pedido
@@ -559,6 +575,7 @@ public partial class CrearPedido : System.Web.UI.Page
                 btnGuardar.Enabled = false;
                 btnAnular.Visible = true;
                 btnImprimir.Visible = true;
+                btnGenerarComprobante.Enabled = true;
                 lblEstado.Text = "Registrado";
                 lblEstado.ForeColor = System.Drawing.Color.Green;
                 lblFechaRegistro.Text = DateTime.Now.ToShortDateString();
@@ -1240,7 +1257,15 @@ public partial class CrearPedido : System.Web.UI.Page
             string n_IdUsuario = dtUsuario.Rows[0]["n_IdUsuario"].ToString();
 
             //Validar que no esté amarrado a un comprobante
-            //
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter("Faregas_Pedido_Seleccionar " + hfPedido.Value, conexion);
+            da.Fill(dt);
+            string i_IdComprobante = dt.Rows[0]["i_IdComprobante"].ToString();
+            if (i_IdComprobante.Trim() != "") 
+            {
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.warning({ message: 'No puede anular la orden de servicio porque tiene un comprobante enlazado' });</script>", false);
+                return;
+            }
 
             //Anular el pedido
             try
@@ -1288,5 +1313,11 @@ public partial class CrearPedido : System.Web.UI.Page
     {
         int i_IdMenu = int.Parse(Request.QueryString["IdMenu"]);
         Response.Redirect("~/ImprimirPedido.aspx?n_IdPedido=" + hfPedido.Value + "&IdMenu=" + i_IdMenu);
+    }
+
+    protected void btnGenerarComprobante_Click(object sender, EventArgs e)
+    {
+        int i_IdMenu = int.Parse(Request.QueryString["IdMenu"]);
+        Response.Redirect("~/CrearComprobante.aspx?n_IdPedido=" + hfPedido.Value + "&IdMenu=" + i_IdMenu);
     }
 }

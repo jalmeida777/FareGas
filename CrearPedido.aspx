@@ -130,6 +130,10 @@
 {
 	text-shadow: none;
 }
+    .style1
+    {
+        width: 100%;
+    }
  </style>
 
 
@@ -183,7 +187,11 @@
                 </td>
                 <td>
                    
-                    &nbsp;</td>
+                                                    <asp:Button runat="server" 
+                        Text="Generar Comprobante" Enabled="False" ID="btnGenerarComprobante" 
+                        OnClick="btnGenerarComprobante_Click"></asp:Button>
+
+                                                </td>
                 <td>
                    
                     &nbsp;</td>
@@ -417,11 +425,11 @@
                                     </asp:BoundField>
                                     <asp:BoundField DataField="v_Descripcion" HeaderText="Producto" />
                                     <asp:BoundField DataField="f_PrecioUnitario" DataFormatString="{0:n2}" 
-                                        HeaderText="Precio">
+                                        HeaderText="Precio S/.">
                                     <ItemStyle HorizontalAlign="Right" Width="100px" />
                                     </asp:BoundField>
                                     <asp:BoundField DataField="f_PrecioTotal" DataFormatString="{0:n2}" 
-                                        HeaderText="Total">
+                                        HeaderText="Total S/.">
                                     <ItemStyle HorizontalAlign="Right" Width="100px" />
                                     </asp:BoundField>
                                     <asp:TemplateField>
@@ -445,12 +453,20 @@
                                         <asp:Label ID="Label151" runat="server" Text="Tipo de Comprobante:"></asp:Label>
                                     </td>
                                     <td align="left" style="padding-left: 5px">
-                                        <asp:RadioButtonList ID="rblTipoComprobante" runat="server" AutoPostBack="True" 
-                                            onselectedindexchanged="rblTipoComprobante_SelectedIndexChanged" 
-                                            RepeatDirection="Horizontal">
-                                            <asp:ListItem Selected="True">Boleta</asp:ListItem>
-                                            <asp:ListItem>Factura</asp:ListItem>
-                                        </asp:RadioButtonList>
+                                        <table cellpadding="0" cellspacing="0" class="style1">
+                                            <tr>
+                                                <td width="150">
+                                                    <asp:RadioButtonList ID="rblTipoComprobante" runat="server" AutoPostBack="True" 
+                                                        OnSelectedIndexChanged="rblTipoComprobante_SelectedIndexChanged" 
+                                                        RepeatDirection="Horizontal">
+                                                        <asp:ListItem Selected="True">Boleta</asp:ListItem>
+                                                        <asp:ListItem>Factura</asp:ListItem>
+                                                    </asp:RadioButtonList>
+                                                </td>
+                                                <td>
+                                                    &nbsp;</td>
+                                            </tr>
+                                        </table>
                                     </td>
                                     <td align="right" width="100">
                                         <asp:Label ID="Label20" runat="server" Text="SubTotal:"></asp:Label>
