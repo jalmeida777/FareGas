@@ -110,7 +110,8 @@
     </table>
                     </td>
         <td valign="top" 
-                style="background-image: url('/VentasWebDevExpress/images/form_sheetbg.png'); background-repeat: repeat">
+                
+                style="background-image: url('/VentasWebDevExpress/images/form_sheetbg.png'); background-repeat: repeat; width: 85%;">
         <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
 
             </asp:ContentPlaceHolder>

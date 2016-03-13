@@ -259,7 +259,8 @@
                                         width="150" __designer:mapid="448">
                                         &nbsp;</td>
                                     <td align="left" style="padding-left: 5px" __designer:mapid="44a">
-                                        &nbsp;</td>
+                                        <asp:HiddenField ID="hfSubTotal" runat="server" />
+                                    </td>
                                     <td align="right" width="100" __designer:mapid="453">
                                         <asp:Label runat="server" Text="SubTotal:" ID="Label20"></asp:Label>
 
@@ -278,7 +279,8 @@
                                         width="150" __designer:mapid="45a">
                                         &nbsp;</td>
                                     <td align="left" style="padding-left: 5px" __designer:mapid="45c">
-                                        &nbsp;</td>
+                                        <asp:HiddenField ID="hfIgv" runat="server" />
+                                    </td>
                                     <td align="right" width="100" __designer:mapid="45e">
                                         <asp:Label runat="server" Text="IGV:(" ID="Label142"></asp:Label>
 
@@ -301,7 +303,8 @@
                                         __designer:mapid="467">
                                         &nbsp;</td>
                                     <td style="padding-left: 5px" __designer:mapid="469">
-                                        &nbsp;</td>
+                                        <asp:HiddenField ID="hfTotal" runat="server" />
+                                    </td>
                                     <td align="right" 
                                         
                                         style="border-top-style: solid; border-top-width: 1px; border-top-color: #999999" 

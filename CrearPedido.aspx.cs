@@ -75,9 +75,18 @@ public partial class CrearPedido : System.Web.UI.Page
             txtAsientos.Text = dt.Rows[0]["i_Asientos"].ToString();
             txtPasajeros.Text = dt.Rows[0]["i_Pasajeros"].ToString();
 
-            txtLongitud.Text = double.Parse(dt.Rows[0]["f_Largo"].ToString()).ToString("N2");
-            txtAncho.Text = double.Parse(dt.Rows[0]["f_Ancho"].ToString()).ToString("N2");
-            txtAltura.Text = double.Parse(dt.Rows[0]["f_Alto"].ToString()).ToString("N2");
+            if (dt.Rows[0]["f_Largo"].ToString() != "")
+            {
+                txtLongitud.Text = double.Parse(dt.Rows[0]["f_Largo"].ToString()).ToString("N2");
+            }
+            if (dt.Rows[0]["f_Ancho"].ToString() != "")
+            {
+                txtAncho.Text = double.Parse(dt.Rows[0]["f_Ancho"].ToString()).ToString("N2");
+            }
+            if (dt.Rows[0]["f_Alto"].ToString() != "")
+            {
+                txtAltura.Text = double.Parse(dt.Rows[0]["f_Alto"].ToString()).ToString("N2");
+            }
 
             ddlCombustibleInicial.SelectedValue = dt.Rows[0]["i_IdCombustible"].ToString();
             txtPesoSecoInicial.Text = dt.Rows[0]["i_PesoNetoInicial"].ToString();
@@ -144,6 +153,8 @@ public partial class CrearPedido : System.Web.UI.Page
             lblUsuarioRegistro.Text = dt.Rows[0]["Usuario"].ToString();
             lblFechaRegistro.Text = dt.Rows[0]["d_FechaRegistra"].ToString();
             ibUsuarioRegistro.ImageUrl = dt.Rows[0]["v_RutaFoto"].ToString();
+
+            lblNumeroComprobante.Text = dt.Rows[0]["v_NumeroComprobante"].ToString();
         }
     }
 
@@ -276,133 +287,8 @@ public partial class CrearPedido : System.Web.UI.Page
             txtPago.Focus();
             return;
         }
-        if (txtPlaca.Text == "") 
-        {
-            ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.warning({ message: 'Debe ingresar el número de placa.' });</script>", false);
-            txtPlaca.Focus();
-            return;
-        }
-        if (txtAnioFabricacion.Text == "") 
-        {
-            ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.warning({ message: 'Debe ingresar el año de fabricación.' });</script>", false);
-            txtAnioFabricacion.Focus();
-            return;
-        }
-        if (txtNumeroSerie.Text == "") 
-        {
-            ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.warning({ message: 'Debe ingresar el número de serie.' });</script>", false);
-            txtNumeroSerie.Focus();
-            return;
-        }
-        if (txtNumeroMotor.Text == "") 
-        {
-            ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.warning({ message: 'Debe ingresar el número de motor.' });</script>", false);
-            txtNumeroMotor.Focus();
-            return;
-        }
-        if (txtColor.Text == "") 
-        {
-            ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.warning({ message: 'Debe ingresar el color.' });</script>", false);
-            txtColor.Focus();
-            return;
-        }
-        if (txtPotencia.Text == "") 
-        {
-            ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.warning({ message: 'Debe ingresar la potencia.' });</script>", false);
-            txtPotencia.Focus();
-            return;
-        }
-        if (txtVersion.Text == "") 
-        {
-            ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.warning({ message: 'Debe ingresar la versión.' });</script>", false);
-            txtVersion.Focus();
-            return;
-        }
-        if (txtCilindrada.Text == "") 
-        {
-            ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.warning({ message: 'Debe ingresar la cilindrada.' });</script>", false);
-            txtCilindrada.Focus();
-            return;
-        }
-        if (txtAsientos.Text == "") 
-        {
-            ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.warning({ message: 'Debe ingresar el número de asientos.' });</script>", false);
-            txtAsientos.Focus();
-            return;
-        }
-        if (txtPasajeros.Text == "")
-        {
-            ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.warning({ message: 'Debe ingresar el número de pasajeros.' });</script>", false);
-            txtPasajeros.Focus();
-            return;
-        }
-        if (txtLongitud.Text == "") 
-        {
-            ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.warning({ message: 'Debe ingresar la longitud.' });</script>", false);
-            txtLongitud.Focus();
-            return;
-        }
-        if (txtAncho.Text == "") 
-        {
-            ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.warning({ message: 'Debe ingresar el ancho.' });</script>", false);
-            txtAncho.Focus();
-            return;
-        }
-        if (txtAltura.Text == "") 
-        {
-            ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.warning({ message: 'Debe ingresar la altura.' });</script>", false);
-            txtAltura.Focus();
-            return;
-        }
-        if (txtEjes.Text == "") 
-        {
-            ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.warning({ message: 'Debe ingresar el número de ejes.' });</script>", false);
-            txtEjes.Focus();
-            return;
-        }
-        if (txtRuedas.Text == "") 
-        {
-            ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.warning({ message: 'Debe ingresar el número de ruedas.' });</script>", false);
-            txtRuedas.Focus();
-            return;
-        }
-        if (txtCilindros.Text == "") 
-        {
-            ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.warning({ message: 'Debe ingresar el número de cilindros.' });</script>", false);
-            txtCilindros.Focus();
-            return;
-        }
-        if (txtPesoSecoInicial.Text == "") 
-        {
-            ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.warning({ message: 'Debe ingresar peso seco inicial.' });</script>", false);
-            txtPesoSecoInicial.Focus();
-            return;
-        }
-        if (txtCargaUtilInicial.Text == "") 
-        {
-            ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.warning({ message: 'Debe ingresar la carga util inicial.' });</script>", false);
-            txtCargaUtilInicial.Focus();
-            return;
-        }
-        if (txtPesoBrutoInicial.Text == "") 
-        {
-            ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.warning({ message: 'Debe ingresar el peso bruto inicial.' });</script>", false);
-            txtPesoBrutoInicial.Focus();
-            return;
-        }
+        
 
-        if (txtNumeroDocumentoPropietario.Text == "") 
-        {
-            ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.warning({ message: 'Debe ingresar el número de documento del propietario.' });</script>", false);
-            txtNumeroDocumentoPropietario.Focus();
-            return;
-        }
-        if (txtNombrePropietario.Text == "") 
-        {
-            ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "tmp", "<script type='text/javascript'>$.growl.warning({ message: 'Debe ingresar el nombre del propietario.' });</script>", false);
-            txtNombrePropietario.Focus();
-            return;
-        }
 
         if (Session["dtUsuario"] != null && Session["Detalle"]!=null)
         {
@@ -421,29 +307,29 @@ public partial class CrearPedido : System.Web.UI.Page
             {
                 if (hdnPropietario.Value == "")
                 {
-                    //Registrar datos del propietario
-                    string i_IdPersona = "0";
-                    SqlCommand cmdPropietario = new SqlCommand();
-                    cmdPropietario.Connection = cn;
-                    cmdPropietario.Transaction = tran;
-                    cmdPropietario.CommandType = CommandType.StoredProcedure;
-                    cmdPropietario.CommandText = "Play_Cliente_Registrar2_Completo";
-                    cmdPropietario.Parameters.AddWithValue("@v_Nombres", txtNombrePropietario.Text.Trim().ToUpper());
-                    cmdPropietario.Parameters.AddWithValue("@v_DocumentoIdentidad", txtNumeroDocumentoPropietario.Text.Trim().ToUpper());
-                    cmdPropietario.Parameters.AddWithValue("@v_Distrito", txtDistritoPropietario.Text.Trim().ToUpper());
-                    cmdPropietario.Parameters.AddWithValue("@v_Direccion", txtDireccionPropietario.Text.Trim().ToUpper());
-                    cmdPropietario.Parameters.AddWithValue("@v_Telefono", txtTelefonoPropietario.Text.Trim().ToUpper());
-                    cmdPropietario.Parameters.AddWithValue("@v_Celular", txtCelularPropietario.Text.Trim().ToUpper());
-                    cmdPropietario.Parameters.AddWithValue("@v_Email", txtEmailPropietario.Text.Trim().ToUpper());
-                    cmdPropietario.Parameters.AddWithValue("@v_Contacto", txtContactoPropietario.Text.Trim().ToUpper());
-                    cmdPropietario.Parameters.AddWithValue("@d_FechaNacimiento", DateTime.Parse(txtCumpleañosPropietario.Text));
-                    cmdPropietario.Parameters.AddWithValue("@c_Genero", rblSexoPropietario.SelectedValue);
-                    cmdPropietario.Parameters.AddWithValue("@t_Comentario", txtComentarioPropietario.Text.Trim().ToUpper());
-                    conexion.Open();
-                    i_IdPersona = cmdPropietario.ExecuteScalar().ToString();
-                    conexion.Close();
-                    cmdPropietario.Dispose();
-                    hdnPropietario.Value = i_IdPersona;
+                    ////Registrar datos del propietario
+                    //string i_IdPersona = "0";
+                    //SqlCommand cmdPropietario = new SqlCommand();
+                    //cmdPropietario.Connection = cn;
+                    //cmdPropietario.Transaction = tran;
+                    //cmdPropietario.CommandType = CommandType.StoredProcedure;
+                    //cmdPropietario.CommandText = "Play_Cliente_Registrar2_Completo";
+                    //cmdPropietario.Parameters.AddWithValue("@v_Nombres", txtNombrePropietario.Text.Trim().ToUpper());
+                    //cmdPropietario.Parameters.AddWithValue("@v_DocumentoIdentidad", txtNumeroDocumentoPropietario.Text.Trim().ToUpper());
+                    //cmdPropietario.Parameters.AddWithValue("@v_Distrito", txtDistritoPropietario.Text.Trim().ToUpper());
+                    //cmdPropietario.Parameters.AddWithValue("@v_Direccion", txtDireccionPropietario.Text.Trim().ToUpper());
+                    //cmdPropietario.Parameters.AddWithValue("@v_Telefono", txtTelefonoPropietario.Text.Trim().ToUpper());
+                    //cmdPropietario.Parameters.AddWithValue("@v_Celular", txtCelularPropietario.Text.Trim().ToUpper());
+                    //cmdPropietario.Parameters.AddWithValue("@v_Email", txtEmailPropietario.Text.Trim().ToUpper());
+                    //cmdPropietario.Parameters.AddWithValue("@v_Contacto", txtContactoPropietario.Text.Trim().ToUpper());
+                    //cmdPropietario.Parameters.AddWithValue("@d_FechaNacimiento", DateTime.Parse(txtCumpleañosPropietario.Text));
+                    //cmdPropietario.Parameters.AddWithValue("@c_Genero", rblSexoPropietario.SelectedValue);
+                    //cmdPropietario.Parameters.AddWithValue("@t_Comentario", txtComentarioPropietario.Text.Trim().ToUpper());
+                    //conexion.Open();
+                    //i_IdPersona = cmdPropietario.ExecuteScalar().ToString();
+                    //conexion.Close();
+                    //cmdPropietario.Dispose();
+                    //hdnPropietario.Value = i_IdPersona;
                 }
                 else 
                 {
@@ -496,31 +382,145 @@ public partial class CrearPedido : System.Web.UI.Page
                 cmd.Parameters.AddWithValue("@i_IdCarroceria", ddlCarroceria.SelectedValue);
                 cmd.Parameters.AddWithValue("@v_Potencia", txtPotencia.Text.Trim().ToUpper());
                 cmd.Parameters.AddWithValue("@v_Version", txtVersion.Text.Trim().ToUpper());
-                cmd.Parameters.AddWithValue("@i_Anio", int.Parse(txtAnioFabricacion.Text));
+
+                if (txtAnioFabricacion.Text == "")
+                {
+                    cmd.Parameters.AddWithValue("@i_Anio", DBNull.Value);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@i_Anio", int.Parse(txtAnioFabricacion.Text));
+                }
+
                 cmd.Parameters.AddWithValue("@v_Serie", txtNumeroSerie.Text.Trim().ToUpper());
                 cmd.Parameters.AddWithValue("@v_Motor", txtNumeroMotor.Text.Trim().ToUpper());
                 cmd.Parameters.AddWithValue("@v_Color", txtColor.Text.Trim().ToUpper());
-                cmd.Parameters.AddWithValue("@i_Cilindros", int.Parse(txtCilindros.Text));
-                cmd.Parameters.AddWithValue("@f_Cilindrada", float.Parse(txtCilindrada.Text));
-                cmd.Parameters.AddWithValue("@i_Ejes", int.Parse(txtEjes.Text));
-                cmd.Parameters.AddWithValue("@i_Ruedas", int.Parse(txtRuedas.Text));
-                cmd.Parameters.AddWithValue("@i_Asientos", int.Parse(txtAsientos.Text));
-                cmd.Parameters.AddWithValue("@i_Pasajeros", int.Parse(txtPasajeros.Text));
-                cmd.Parameters.AddWithValue("@f_Largo", float.Parse(txtLongitud.Text));
-                cmd.Parameters.AddWithValue("@f_Ancho", float.Parse(txtAncho.Text));
-                cmd.Parameters.AddWithValue("@f_Alto", float.Parse(txtAltura.Text));
+
+                if (txtCilindros.Text == "") 
+                {
+                    cmd.Parameters.AddWithValue("@i_Cilindros", DBNull.Value);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@i_Cilindros", int.Parse(txtCilindros.Text));
+                }
+
+                if (txtCilindrada.Text == "") 
+                {
+                    cmd.Parameters.AddWithValue("@f_Cilindrada", DBNull.Value);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@f_Cilindrada", float.Parse(txtCilindrada.Text));
+                }
+
+                if (txtEjes.Text == "") 
+                {
+                    cmd.Parameters.AddWithValue("@i_Ejes", DBNull.Value);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@i_Ejes", int.Parse(txtEjes.Text));
+                }
+
+                if (txtRuedas.Text == "") 
+                {
+                    cmd.Parameters.AddWithValue("@i_Ruedas", DBNull.Value);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@i_Ruedas", int.Parse(txtRuedas.Text));
+                }
+
+                if (txtAsientos.Text == "") 
+                {
+                    cmd.Parameters.AddWithValue("@i_Asientos", DBNull.Value);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@i_Asientos", int.Parse(txtAsientos.Text));
+                }
+
+                if (txtPasajeros.Text == "") 
+                {
+                    cmd.Parameters.AddWithValue("@i_Pasajeros", DBNull.Value);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@i_Pasajeros", int.Parse(txtPasajeros.Text));
+                }
+
+                if (txtLongitud.Text == "") 
+                {
+                    cmd.Parameters.AddWithValue("@f_Largo", DBNull.Value);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@f_Largo", float.Parse(txtLongitud.Text));
+                }
+
+                if (txtAncho.Text == "") 
+                {
+                    cmd.Parameters.AddWithValue("@f_Ancho", DBNull.Value);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@f_Ancho", float.Parse(txtAncho.Text));
+                }
+
+                if (txtAltura.Text == "") 
+                {
+                    cmd.Parameters.AddWithValue("@f_Alto", DBNull.Value);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@f_Alto", float.Parse(txtAltura.Text));
+                }
+
                 cmd.Parameters.AddWithValue("@i_IdCombustible", ddlCombustibleInicial.SelectedValue);
 
-                cmd.Parameters.AddWithValue("@i_PesoNetoInicial", int.Parse(txtPesoSecoInicial.Text));
-                cmd.Parameters.AddWithValue("@i_PesoBrutoInicial", int.Parse(txtPesoBrutoInicial.Text));
-                cmd.Parameters.AddWithValue("@i_CargaUtilInicial", int.Parse(txtCargaUtilInicial.Text));
+                if (txtPesoSecoInicial.Text == "") 
+                {
+                    cmd.Parameters.AddWithValue("@i_PesoNetoInicial", DBNull.Value);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@i_PesoNetoInicial", int.Parse(txtPesoSecoInicial.Text));
+                }
+
+                if (txtPesoBrutoInicial.Text == "") 
+                {
+                    cmd.Parameters.AddWithValue("@i_PesoBrutoInicial", DBNull.Value);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@i_PesoBrutoInicial", int.Parse(txtPesoBrutoInicial.Text));
+                }
+
+                if (txtCargaUtilInicial.Text == "") 
+                {
+                    cmd.Parameters.AddWithValue("@i_CargaUtilInicial", DBNull.Value);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@i_CargaUtilInicial", int.Parse(txtCargaUtilInicial.Text));
+                }
                 
                 cmd.Parameters.AddWithValue("@v_Propietario", txtNombrePropietario.Text.Trim().ToUpper());
                 cmd.Parameters.AddWithValue("@n_IdUsuarioRegistra", n_IdUsuario);
                 cmd.Parameters.AddWithValue("@t_Obs", txtObservacion.Text);
                 cmd.Parameters.AddWithValue("@v_RangoHojasInicial", txtNumeroHojaInicial.Text.Trim().ToUpper());
                 cmd.Parameters.AddWithValue("@v_RangoHojasFinal", txtNumeroHojaFinal.Text.Trim().ToUpper());
-                cmd.Parameters.AddWithValue("@i_IdPropietario", hdnPropietario.Value);
+
+                if (hdnPropietario.Value == "")
+                {
+                    cmd.Parameters.AddWithValue("@i_IdPropietario", DBNull.Value);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@i_IdPropietario", hdnPropietario.Value);
+                }
+
                 cmd.Parameters.AddWithValue("@i_IdCliente", hdnValue.Value);
                 cmd.Parameters.AddWithValue("@v_TipoDocumento", rblTipoComprobante.SelectedValue);
                 string n_IdPedido = cmd.ExecuteScalar().ToString();
@@ -687,6 +687,7 @@ public partial class CrearPedido : System.Web.UI.Page
 
     void CalcularTotales() 
     {
+
         DataTable dt = new DataTable();
         dt = (DataTable)Session["Detalle"];
 
@@ -697,8 +698,9 @@ public partial class CrearPedido : System.Web.UI.Page
                 double subtotal = 0;
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                    subtotal = subtotal + double.Parse(dt.Rows[i]["f_PrecioUnitario"].ToString());
+                    subtotal = subtotal + double.Parse(dt.Rows[i]["f_PrecioTotal"].ToString());
                 }
+              
                 lblSubTotal.Text = subtotal.ToString("N2");
 
                 double igv = 0;
@@ -960,34 +962,34 @@ public partial class CrearPedido : System.Web.UI.Page
             tblCliente1.Visible = false;
             tblCliente2.Visible = true;
 
-            //Mostrar como propietario también
-            //Consultar datos del cliente y mostrarlos
-            string i_IdPersona = hdnValue.Value;
-            SqlDataAdapter daPersona = new SqlDataAdapter("Play_Cliente2_Seleccionar " + i_IdPersona, conexion);
-            DataTable dtPersona = new DataTable();
-            daPersona.Fill(dtPersona);
-            if (dtPersona != null)
-            {
-                if (dtPersona.Rows.Count > 0)
-                {
-                    //Propietario
-                    rblSexoPropietario.SelectedValue = dtPersona.Rows[0]["c_Genero"].ToString();
-                    txtNombrePropietario.Text = dtPersona.Rows[0]["v_Nombres"].ToString();
-                    txtNumeroDocumentoPropietario.Text = dtPersona.Rows[0]["v_DocumentoIdentidad"].ToString();
-                    txtDistritoPropietario.Text = dtPersona.Rows[0]["v_Distrito"].ToString();
-                    txtDireccionPropietario.Text = dtPersona.Rows[0]["v_Direccion"].ToString();
-                    txtTelefonoPropietario.Text = dtPersona.Rows[0]["v_Telefono"].ToString();
-                    txtCelularPropietario.Text = dtPersona.Rows[0]["v_Celular"].ToString();
-                    txtEmailPropietario.Text = dtPersona.Rows[0]["v_Email"].ToString();
-                    txtContactoPropietario.Text = dtPersona.Rows[0]["v_Contacto"].ToString();
-                    if (dtPersona.Rows[0]["d_FechaNacimiento"].ToString() != "")
-                    {
-                        txtCumpleañosPropietario.Text = DateTime.Parse(dtPersona.Rows[0]["d_FechaNacimiento"].ToString()).ToShortDateString();
-                    }
+            ////Mostrar como propietario también
+            ////Consultar datos del cliente y mostrarlos
+            //string i_IdPersona = hdnValue.Value;
+            //SqlDataAdapter daPersona = new SqlDataAdapter("Play_Cliente2_Seleccionar " + i_IdPersona, conexion);
+            //DataTable dtPersona = new DataTable();
+            //daPersona.Fill(dtPersona);
+            //if (dtPersona != null)
+            //{
+            //    if (dtPersona.Rows.Count > 0)
+            //    {
+            //        //Propietario
+            //        rblSexoPropietario.SelectedValue = dtPersona.Rows[0]["c_Genero"].ToString();
+            //        txtNombrePropietario.Text = dtPersona.Rows[0]["v_Nombres"].ToString();
+            //        txtNumeroDocumentoPropietario.Text = dtPersona.Rows[0]["v_DocumentoIdentidad"].ToString();
+            //        txtDistritoPropietario.Text = dtPersona.Rows[0]["v_Distrito"].ToString();
+            //        txtDireccionPropietario.Text = dtPersona.Rows[0]["v_Direccion"].ToString();
+            //        txtTelefonoPropietario.Text = dtPersona.Rows[0]["v_Telefono"].ToString();
+            //        txtCelularPropietario.Text = dtPersona.Rows[0]["v_Celular"].ToString();
+            //        txtEmailPropietario.Text = dtPersona.Rows[0]["v_Email"].ToString();
+            //        txtContactoPropietario.Text = dtPersona.Rows[0]["v_Contacto"].ToString();
+            //        if (dtPersona.Rows[0]["d_FechaNacimiento"].ToString() != "")
+            //        {
+            //            txtCumpleañosPropietario.Text = DateTime.Parse(dtPersona.Rows[0]["d_FechaNacimiento"].ToString()).ToShortDateString();
+            //        }
 
-                    txtComentarioPropietario.Text = dtPersona.Rows[0]["t_Comentario"].ToString();
-                }
-            }
+            //        txtComentarioPropietario.Text = dtPersona.Rows[0]["t_Comentario"].ToString();
+            //    }
+            //}
 
         }
         else 

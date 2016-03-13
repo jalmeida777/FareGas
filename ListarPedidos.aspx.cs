@@ -89,8 +89,5 @@ public partial class ListarPedidos : System.Web.UI.Page
 
         }
     }
-    protected void gvDetalle_BeforePerformDataSelect(object sender, EventArgs e)
-    {
-        Session["n_IdPedido"] = (sender as ASPxGridView).GetMasterRowKeyValue();
-    }
+
 }

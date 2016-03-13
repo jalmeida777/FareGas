@@ -33,6 +33,11 @@ public partial class CrearComprobante : System.Web.UI.Page
                 txtFechaInicial.Text = DateTime.Parse(dt.Rows[0]["d_FechaEmision"].ToString()).ToShortDateString();
                 ddlFormaPago.SelectedValue = dt.Rows[0]["n_IdFormaPago"].ToString();
                 ddlMoneda.SelectedValue = dt.Rows[0]["n_IdMoneda"].ToString();
+
+                hfSubTotal.Value = dt.Rows[0]["f_SubTotal"].ToString();
+                hfIgv.Value = dt.Rows[0]["f_Impuesto"].ToString();
+                hfTotal.Value = dt.Rows[0]["f_Total"].ToString();
+
                 lblSubTotal.Text = double.Parse(dt.Rows[0]["f_SubTotal"].ToString()).ToString("N2");
                 lblIGV.Text = double.Parse(dt.Rows[0]["f_Impuesto"].ToString()).ToString("N2");
                 lblTotal.Text = double.Parse(dt.Rows[0]["f_Total"].ToString()).ToString("N2");
@@ -216,9 +221,9 @@ public partial class CrearComprobante : System.Web.UI.Page
                 cmd.Parameters.AddWithValue("@i_IdCliente", hfCliente.Value);
                 cmd.Parameters.AddWithValue("@n_IdFormaPago", ddlFormaPago.SelectedValue);
                 cmd.Parameters.AddWithValue("@n_IdMoneda", ddlMoneda.SelectedValue);
-                cmd.Parameters.AddWithValue("@f_SubTotal", lblSubTotal.Text);
-                cmd.Parameters.AddWithValue("@f_Impuesto", lblIGV.Text);
-                cmd.Parameters.AddWithValue("@f_Total", lblTotal.Text);
+                cmd.Parameters.AddWithValue("@f_SubTotal", hfSubTotal.Value);
+                cmd.Parameters.AddWithValue("@f_Impuesto", hfIgv.Value);
+                cmd.Parameters.AddWithValue("@f_Total", hfTotal.Value);
                 cmd.Parameters.AddWithValue("@v_NroPlaca", lblPlaca.Text);
                 cmd.Parameters.AddWithValue("@t_Obs", txtObservacion.Text);
                 cmd.Parameters.AddWithValue("@t_MontoEscrito", lblMontoEscrito.Text);

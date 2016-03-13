@@ -453,20 +453,12 @@
                                         <asp:Label ID="Label151" runat="server" Text="Tipo de Comprobante:"></asp:Label>
                                     </td>
                                     <td align="left" style="padding-left: 5px">
-                                        <table cellpadding="0" cellspacing="0" class="style1">
-                                            <tr>
-                                                <td width="150">
-                                                    <asp:RadioButtonList ID="rblTipoComprobante" runat="server" AutoPostBack="True" 
-                                                        OnSelectedIndexChanged="rblTipoComprobante_SelectedIndexChanged" 
-                                                        RepeatDirection="Horizontal">
-                                                        <asp:ListItem Selected="True">Boleta</asp:ListItem>
-                                                        <asp:ListItem>Factura</asp:ListItem>
-                                                    </asp:RadioButtonList>
-                                                </td>
-                                                <td>
-                                                    &nbsp;</td>
-                                            </tr>
-                                        </table>
+                                        <asp:RadioButtonList ID="rblTipoComprobante" runat="server" AutoPostBack="True" 
+                                            OnSelectedIndexChanged="rblTipoComprobante_SelectedIndexChanged" 
+                                            RepeatDirection="Horizontal">
+                                            <asp:ListItem Selected="True">Boleta</asp:ListItem>
+                                            <asp:ListItem>Factura</asp:ListItem>
+                                        </asp:RadioButtonList>
                                     </td>
                                     <td align="right" width="100">
                                         <asp:Label ID="Label20" runat="server" Text="SubTotal:"></asp:Label>
@@ -483,11 +475,10 @@
                                         
                                         style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933" 
                                         width="150">
-                                        <asp:Label ID="Label124" runat="server" Text="Nro. Certificado:"></asp:Label>
+                                        <asp:Label ID="Label196" runat="server" Text="N° Comprobante:"></asp:Label>
                                     </td>
                                     <td align="left" style="padding-left: 5px">
-                                        <asp:TextBox ID="txtNumeroCertificado" runat="server" CssClass="inputNormal" 
-                                            MaxLength="50" Width="100px"></asp:TextBox>
+                                        <asp:Label ID="lblNumeroComprobante" runat="server"></asp:Label>
                                     </td>
                                     <td align="right" width="100">
                                         <asp:Label ID="Label142" runat="server" Text="IGV:("></asp:Label>
@@ -505,11 +496,11 @@
                                     <td align="left" 
                                         
                                         style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933">
-                                        <asp:Label ID="Label125" runat="server" Text="Nro. Hoja:"></asp:Label>
+                                        <asp:Label ID="Label124" runat="server" Text="Nro. Certificado:"></asp:Label>
                                     </td>
                                     <td style="padding-left: 5px">
-                                        <asp:TextBox ID="txtNumeroHoja" runat="server" CssClass="inputNormal" 
-                                            Width="100px"></asp:TextBox>
+                                        <asp:TextBox ID="txtNumeroCertificado" runat="server" CssClass="inputNormal" 
+                                            MaxLength="50" Width="100px"></asp:TextBox>
                                     </td>
                                     <td align="right" 
                                         style="border-top-style: solid; border-top-width: 1px; border-top-color: #999999">
@@ -529,10 +520,10 @@
                                 </tr>
                                 <tr>
                                     <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933">
-                                        <asp:Label ID="Label143" runat="server" Text="Nro. Hoja Inicial:"></asp:Label>
+                                        <asp:Label ID="Label125" runat="server" Text="Nro. Hoja:"></asp:Label>
                                     </td>
                                     <td>
-                                        <asp:TextBox ID="txtNumeroHojaInicial" runat="server" CssClass="inputNormal" 
+                                        <asp:TextBox ID="txtNumeroHoja" runat="server" CssClass="inputNormal" 
                                             Width="100px"></asp:TextBox>
                                     </td>
                                     <td align="right" 
@@ -555,10 +546,10 @@
                                 </tr>
                                 <tr>
                                     <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933">
-                                        <asp:Label ID="Label144" runat="server" Text="Nro. Hoja Final:"></asp:Label>
+                                        <asp:Label ID="Label143" runat="server" Text="Nro. Hoja Inicial:"></asp:Label>
                                     </td>
                                     <td>
-                                        <asp:TextBox ID="txtNumeroHojaFinal" runat="server" CssClass="inputNormal" 
+                                        <asp:TextBox ID="txtNumeroHojaInicial" runat="server" CssClass="inputNormal" 
                                             Width="100px"></asp:TextBox>
                                     </td>
                                     <td align="right">
@@ -570,6 +561,21 @@
                                     <td align="right">
                                         <asp:Label ID="lblVuelto" runat="server"></asp:Label>
                                     </td>
+                                </tr>
+                                <tr>
+                                    <td style="border-right-style: solid; border-right-width: 1px; border-right-color: #339933">
+                                        <asp:Label ID="Label144" runat="server" Text="Nro. Hoja Final:"></asp:Label>
+                                    </td>
+                                    <td>
+                                        <asp:TextBox ID="txtNumeroHojaFinal" runat="server" CssClass="inputNormal" 
+                                            Width="100px"></asp:TextBox>
+                                    </td>
+                                    <td align="right">
+                                        &nbsp;</td>
+                                    <td align="right" width="20">
+                                        &nbsp;</td>
+                                    <td align="right">
+                                        &nbsp;</td>
                                 </tr>
                             </table>
                         </td>

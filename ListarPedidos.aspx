@@ -135,10 +135,10 @@
                             </DataItemTemplate>
                         </dx:GridViewDataTextColumn>
                         <dx:GridViewDataTextColumn Caption="Fecha" FieldName="d_FechaEmision" 
-                            VisibleIndex="1" Width="120px" ShowInCustomizationForm="True">
+                            VisibleIndex="1" Width="180px" ShowInCustomizationForm="True">
                         </dx:GridViewDataTextColumn>
                         <dx:GridViewDataTextColumn Caption="Propietario" FieldName="Propietario" 
-                            VisibleIndex="3" Width="120px" ShowInCustomizationForm="True">
+                            VisibleIndex="3" Width="200px" ShowInCustomizationForm="True">
                         </dx:GridViewDataTextColumn>
                         <dx:GridViewDataTextColumn Caption="Forma de Pago" FieldName="v_FormaPago" 
                             VisibleIndex="4" Width="100px" ShowInCustomizationForm="True">
@@ -149,26 +149,40 @@
                         <dx:GridViewDataTextColumn Caption="Creado por" FieldName="Usuario" 
                             VisibleIndex="5" Width="150px" ShowInCustomizationForm="True">
                         </dx:GridViewDataTextColumn>
-                        <dx:GridViewDataTextColumn Caption="Total" FieldName="f_Total" VisibleIndex="8" 
+                        <dx:GridViewDataTextColumn Caption="Total" FieldName="f_Total" VisibleIndex="13" 
                             Width="80px" ShowInCustomizationForm="True">
-                            <PropertiesTextEdit DisplayFormatString="{0:C}">
-                            </PropertiesTextEdit>
+                            <PropertiesTextEdit DisplayFormatString="{0:C}"></PropertiesTextEdit>
                         </dx:GridViewDataTextColumn>
                         <dx:GridViewDataTextColumn Caption="Sub Total" FieldName="f_SubTotal" 
-                            ShowInCustomizationForm="True" VisibleIndex="6" Width="80px">
-                            <propertiestextedit displayformatstring="{0:C}">
-                            </propertiestextedit>
+                            ShowInCustomizationForm="True" VisibleIndex="11" Width="80px">
+                            <propertiestextedit displayformatstring="{0:C}"></propertiestextedit>
                         </dx:GridViewDataTextColumn>
                         <dx:GridViewDataTextColumn Caption="IGV" FieldName="f_Impuesto" 
-                            ShowInCustomizationForm="True" VisibleIndex="7" Width="80px">
-                            <propertiestextedit displayformatstring="{0:C}">
-                            </propertiestextedit>
+                            ShowInCustomizationForm="True" VisibleIndex="12" Width="80px">
+                            <propertiestextedit displayformatstring="{0:C}"></propertiestextedit>
                         </dx:GridViewDataTextColumn>
-                        <dx:GridViewDataTextColumn Caption="Estado" FieldName="Estado" VisibleIndex="9" 
+                        <dx:GridViewDataTextColumn Caption="Estado" FieldName="Estado" VisibleIndex="14" 
                             Width="50px">
+                        </dx:GridViewDataTextColumn>
+                        <dx:GridViewDataTextColumn Caption="N° Comprobante" 
+                            FieldName="v_NumeroComprobante" VisibleIndex="7" Width="100px">
+                        </dx:GridViewDataTextColumn>
+                        <dx:GridViewDataTextColumn Caption="N° Certificado" 
+                            FieldName="v_NumeroCertificado" VisibleIndex="8" Width="100px">
+                        </dx:GridViewDataTextColumn>
+                        <dx:GridViewDataTextColumn Caption="N° Hoja" FieldName="v_NumeroHoja" 
+                            VisibleIndex="9" Width="100px">
+                        </dx:GridViewDataTextColumn>
+                        <dx:GridViewDataTextColumn Caption="Observaciones" FieldName="t_Obs" 
+                            VisibleIndex="10">
+                        </dx:GridViewDataTextColumn>
+                        <dx:GridViewDataTextColumn Caption="Tipo Comprobante" 
+                            FieldName="v_TipoDocumento" VisibleIndex="6" Width="100px">
                         </dx:GridViewDataTextColumn>
                     </Columns>
                     <SettingsBehavior AutoFilterRowInputDelay="0" />
+                                    <SettingsBehavior AutoFilterRowInputDelay="0" />
+                                    <SettingsBehavior AutoFilterRowInputDelay="0" />
                                     <SettingsBehavior AutoFilterRowInputDelay="0" />
                                     <SettingsBehavior AutoFilterRowInputDelay="0" />
                     <SettingsPager PageSize="5" ShowDefaultImages="False">
@@ -188,6 +202,12 @@
                                     <Settings ShowFooter="True" />
                                     <SettingsCookies StoreFiltering="False" />
                                     <SettingsDetail ShowDetailRow="True" />
+                                    <Settings ShowFooter="True" showhorizontalscrollbar="True" />
+                                    <SettingsCookies StoreFiltering="False" />
+                                    <SettingsDetail ShowDetailRow="True" />
+                                    <Settings ShowFooter="True" ShowHorizontalScrollBar="True" />
+                                    <SettingsCookies StoreFiltering="False" />
+                                    <settingsdetail showdetailbuttons="False" />
                     <Images SpriteCssFilePath="~/App_Themes/PlasticBlue/{0}/sprite.css">
                         <LoadingPanelOnStatusBar Url="~/App_Themes/PlasticBlue/GridView/gvLoadingOnStatusBar.gif">
                         </LoadingPanelOnStatusBar>
@@ -209,62 +229,6 @@
                         <ProgressBar Height="25px">
                         </ProgressBar>
                     </StylesEditors>
-                    <Templates>
-                        <DetailRow>
-                            <dx:ASPxGridView ID="gvDetalle" runat="server" AutoGenerateColumns="False" 
-                                CssFilePath="~/App_Themes/PlasticBlue/{0}/styles.css" CssPostfix="PlasticBlue" 
-                                DataSourceID="SqlDataSource2" 
-                                onbeforeperformdataselect="gvDetalle_BeforePerformDataSelect" Width="100%">
-                                <Columns>
-                                    <dx:GridViewDataTextColumn Caption="Cantidad" FieldName="i_Cantidad" 
-                                        VisibleIndex="0" Width="80px">
-                                    </dx:GridViewDataTextColumn>
-                                    <dx:GridViewDataTextColumn Caption="Precio Unitario S/." 
-                                        FieldName="f_PrecioUnitario" VisibleIndex="3" Width="100px">
-                                        <PropertiesTextEdit DisplayFormatString="{0:C}">
-                                        </PropertiesTextEdit>
-                                    </dx:GridViewDataTextColumn>
-                                    <dx:GridViewDataTextColumn Caption="Precio Total S/." FieldName="f_PrecioTotal" 
-                                        VisibleIndex="4" Width="100px">
-                                        <PropertiesTextEdit DisplayFormatString="{0:C}">
-                                        </PropertiesTextEdit>
-                                    </dx:GridViewDataTextColumn>
-                                    <dx:GridViewDataTextColumn Caption="Producto" FieldName="Producto" 
-                                        VisibleIndex="2">
-                                    </dx:GridViewDataTextColumn>
-                                </Columns>
-                                <SettingsPager ShowDefaultImages="False" Visible="False">
-                                    <AllButton Text="All">
-                                    </AllButton>
-                                    <NextPageButton Text="Next &gt;">
-                                    </NextPageButton>
-                                    <PrevPageButton Text="&lt; Prev">
-                                    </PrevPageButton>
-                                </SettingsPager>
-                                <Images SpriteCssFilePath="~/App_Themes/PlasticBlue/{0}/sprite.css">
-                                    <LoadingPanelOnStatusBar Url="~/App_Themes/PlasticBlue/GridView/gvLoadingOnStatusBar.gif">
-                                    </LoadingPanelOnStatusBar>
-                                    <LoadingPanel Url="~/App_Themes/PlasticBlue/GridView/Loading.gif">
-                                    </LoadingPanel>
-                                </Images>
-                                <ImagesFilterControl>
-                                    <LoadingPanel Url="~/App_Themes/PlasticBlue/Editors/Loading.gif">
-                                    </LoadingPanel>
-                                </ImagesFilterControl>
-                                <Styles CssFilePath="~/App_Themes/PlasticBlue/{0}/styles.css" 
-                                    CssPostfix="PlasticBlue">
-                                    <Header ImageSpacing="10px" SortingImageSpacing="10px">
-                                    </Header>
-                                </Styles>
-                                <StylesEditors>
-                                    <CalendarHeader Spacing="11px">
-                                    </CalendarHeader>
-                                    <ProgressBar Height="25px">
-                                    </ProgressBar>
-                                </StylesEditors>
-                            </dx:ASPxGridView>
-                        </DetailRow>
-                    </Templates>
                 </dx:ASPxGridView>
                 <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
                     ConnectionString="<%$ ConnectionStrings:PlayConnectionString %>" 
@@ -282,14 +246,6 @@
                             PropertyName="Text" Type="String" DefaultValue="%" />
                         <asp:ControlParameter ControlID="txtPlaca" Name="v_NroPlaca" 
                             PropertyName="Text" Type="String" DefaultValue="%" />
-                    </SelectParameters>
-                </asp:SqlDataSource>
-                <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
-                    ConnectionString="<%$ ConnectionStrings:PlayConnectionString %>" 
-                    SelectCommand="Play_DetPedido_Listar" SelectCommandType="StoredProcedure">
-                    <SelectParameters>
-                        <asp:SessionParameter Name="n_IdPedido" SessionField="n_IdPedido" 
-                            Type="Decimal" />
                     </SelectParameters>
                 </asp:SqlDataSource>
 

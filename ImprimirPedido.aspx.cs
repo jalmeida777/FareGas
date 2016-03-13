@@ -21,4 +21,5 @@ public partial class ImprimirPedido : System.Web.UI.Page
         int i_IdMenu = int.Parse(Request.QueryString["IdMenu"]);
         Response.Redirect("~/CrearPedido.aspx?n_IdPedido=" + hfIdPedido.Value + "&IdMenu=" + i_IdMenu);
     }
+
 }
