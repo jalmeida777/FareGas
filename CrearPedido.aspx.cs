@@ -695,27 +695,31 @@ public partial class CrearPedido : System.Web.UI.Page
         {
             if (dt.Rows.Count > 0)
             {
-                double subtotal = 0;
+                double total = 0;
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                    subtotal = subtotal + double.Parse(dt.Rows[i]["f_PrecioTotal"].ToString());
+                    total = total + double.Parse(dt.Rows[i]["f_PrecioTotal"].ToString());
                 }
-              
-                lblSubTotal.Text = subtotal.ToString("N2");
+
+                lblTotal.Text = total.ToString("N2");
+
+                double subtotal = 0;
 
                 double igv = 0;
                 if (rblTipoComprobante.SelectedItem.Text == "Boleta")
                 {
                     igv = 0;
                     lblIGV.Text = "0.00";
+                    subtotal = total;
                 }
                 else if (rblTipoComprobante.SelectedItem.Text == "Factura")
                 {
-                    igv = subtotal * double.Parse(lblIgvPorc.Text) / 100;
+                    subtotal = total / ((double.Parse(lblIgvPorc.Text) / 100) + 1);
+                    igv = subtotal * 18 / 100;
                     lblIGV.Text = igv.ToString("N2");
                 }
-                double total = 0;
-                total = subtotal + igv;
+
+                lblSubTotal.Text = subtotal.ToString("N2");
                 lblTotal.Text = total.ToString("N2");
                 txtPago.Text = total.ToString("N2");
                 lblVuelto.Text = "0.00";
