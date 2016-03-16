@@ -238,7 +238,15 @@
 <asp:BoundField DataField="i_Cantidad" HeaderText="Cantidad">
 <ItemStyle Width="50px" HorizontalAlign="Center"></ItemStyle>
 </asp:BoundField>
-<asp:BoundField DataField="v_Descripcion" HeaderText="Producto"></asp:BoundField>
+                                    <asp:TemplateField HeaderText="Producto">
+                                        <EditItemTemplate>
+                                            <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("v_Descripcion") %>'></asp:TextBox>
+                                        </EditItemTemplate>
+                                        <ItemTemplate>
+                                            <asp:TextBox ID="txtProducto" runat="server" 
+                                                Text='<%# Bind("v_Descripcion") %>' Width="100%"></asp:TextBox>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
 <asp:BoundField DataField="f_PrecioUnitario" DataFormatString="{0:n2}" HeaderText="Precio S/.">
 <ItemStyle HorizontalAlign="Right" Width="100px"></ItemStyle>
 </asp:BoundField>

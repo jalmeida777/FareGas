@@ -78,7 +78,7 @@ public partial class CrearComprobante : System.Web.UI.Page
                 gv.DataSource = dtDetalle;
                 Session["Detalle"] = dtDetalle;
                 gv.DataBind();
-                gv.Enabled = false;
+                gv.Enabled = true;
 
                 
             }
@@ -245,8 +245,13 @@ public partial class CrearComprobante : System.Web.UI.Page
                 DataTable dt = new DataTable();
                 dt = (DataTable)Session["Detalle"];
 
+                TextBox txtPro = new TextBox();
+
+
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
+                    txtPro = (TextBox)gv.Rows[i].FindControl("txtProducto");
+
                     SqlCommand cmdDetalle = new SqlCommand();
                     cmdDetalle.Connection = cn;
                     cmdDetalle.Transaction = tran;
@@ -257,6 +262,7 @@ public partial class CrearComprobante : System.Web.UI.Page
                     cmdDetalle.Parameters.AddWithValue("@i_Cantidad", dt.Rows[i]["i_Cantidad"].ToString());
                     cmdDetalle.Parameters.AddWithValue("@f_PrecioUnitario", dt.Rows[i]["f_PrecioUnitario"].ToString());
                     cmdDetalle.Parameters.AddWithValue("@f_PrecioTotal", dt.Rows[i]["f_PrecioTotal"].ToString());
+                    cmdDetalle.Parameters.AddWithValue("@v_ProductoDescripcion", txtPro.Text);
                     cmdDetalle.ExecuteNonQuery();
                     cmdDetalle.Dispose();
                 }
@@ -290,6 +296,7 @@ public partial class CrearComprobante : System.Web.UI.Page
                 lblFechaRegistro.Text = DateTime.Now.ToShortDateString();
                 lblUsuarioRegistro.Text = Usuario;
                 txtObservacion.Enabled = false;
+                gv.Enabled = false;
             }
             catch (Exception ex)
             {
