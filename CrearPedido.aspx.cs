@@ -1317,8 +1317,11 @@ public partial class CrearPedido : System.Web.UI.Page
 
     protected void btnImprimir_Click(object sender, ImageClickEventArgs e)
     {
+        
         int i_IdMenu = int.Parse(Request.QueryString["IdMenu"]);
+
         Response.Redirect("~/ImprimirPedido.aspx?n_IdPedido=" + hfPedido.Value + "&IdMenu=" + i_IdMenu);
+        
     }
 
     protected void btnGenerarComprobante_Click(object sender, EventArgs e)

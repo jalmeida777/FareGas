@@ -350,7 +350,32 @@ public partial class CrearComprobante : System.Web.UI.Page
     protected void btnImprimir_Click(object sender, ImageClickEventArgs e)
     {
         int i_IdMenu = int.Parse(Request.QueryString["IdMenu"]);
-        Response.Redirect("~/ImprimirComprobante.aspx?i_IdComprobante=" + hfComprobante.Value + "&IdMenu=" + i_IdMenu);
+
+        if (ddlEmpresa.SelectedItem.Text == "A Y N RAND S.A.C." && rblTipoComprobante.SelectedItem.Text == "Boleta")
+        {
+            Response.Redirect("~/ImprimirBoletaAYNRAND.aspx?i_IdComprobante=" + hfComprobante.Value + "&IdMenu=" + i_IdMenu);
+        }
+        else if (ddlEmpresa.SelectedItem.Text == "GRUPO TECNOLOGICO AUTOMOTRIZ S.A.C." && rblTipoComprobante.SelectedItem.Text == "Boleta")
+        {
+            Response.Redirect("~/ImprimirBoletaGTA.aspx?i_IdComprobante=" + hfComprobante.Value + "&IdMenu=" + i_IdMenu);
+        }
+        else if (ddlEmpresa.SelectedItem.Text == "PERCIVAL S.A.C." && rblTipoComprobante.SelectedItem.Text == "Boleta")
+        {
+            Response.Redirect("~/ImprimirBoletaPERCIVAL.aspx?i_IdComprobante=" + hfComprobante.Value + "&IdMenu=" + i_IdMenu);
+        }
+
+        else if (ddlEmpresa.SelectedItem.Text == "A Y N RAND S.A.C." && rblTipoComprobante.SelectedItem.Text == "Factura")
+        {
+            Response.Redirect("~/ImprimirFacturaAYNRAND.aspx?i_IdComprobante=" + hfComprobante.Value + "&IdMenu=" + i_IdMenu);
+        }
+        else if (ddlEmpresa.SelectedItem.Text == "GRUPO TECNOLOGICO AUTOMOTRIZ S.A.C." && rblTipoComprobante.SelectedItem.Text == "Factura")
+        {
+            Response.Redirect("~/ImprimirFacturaGTA.aspx?i_IdComprobante=" + hfComprobante.Value + "&IdMenu=" + i_IdMenu);
+        }
+        else if (ddlEmpresa.SelectedItem.Text == "PERCIVAL S.A.C." && rblTipoComprobante.SelectedItem.Text == "Factura")
+        {
+            Response.Redirect("~/ImprimirFacturaPERCIVAL.aspx?i_IdComprobante=" + hfComprobante.Value + "&IdMenu=" + i_IdMenu);
+        }
     }
 
     protected void btnSalir_Click(object sender, ImageClickEventArgs e)

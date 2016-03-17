@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Imprimir Comprobante" Language="C#" MasterPageFile="~/Plantilla.master" AutoEventWireup="true" CodeFile="ImprimirComprobante.aspx.cs" Inherits="ImprimirComprobante" %>
+﻿<%@ Page Title="Imprimir Comprobante" Language="C#" MasterPageFile="~/Plantilla.master" AutoEventWireup="true" CodeFile="ImprimirBoletaAYNRAND.aspx.cs" Inherits="ImprimirBoletaAYNRAND" %>
 <%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="cc1" %>
 <%@ Register assembly="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" namespace="Microsoft.Reporting.WebForms" tagprefix="rsweb" %>
 
@@ -30,7 +30,9 @@
                 </td>
                 <td>
                    
-                    &nbsp;</td>
+                    <asp:ImageButton ID="btnImprimir" runat="server" 
+                        ImageUrl="~/images/Imprimir.jpg" onclick="btnImprimir_Click" />
+                </td>
                 </tr></table>
             </div>
                           <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
@@ -83,7 +85,7 @@
                     Font-Size="8pt" InteractiveDeviceInfos="(Collection)" 
                     WaitMessageFont-Names="Verdana" 
     WaitMessageFont-Size="14pt" Width="100%">
-                    <LocalReport ReportPath="Comprobante.rdlc">
+                    <LocalReport ReportPath="BoletaAYNRAND.rdlc">
                         <DataSources>
                             <rsweb:ReportDataSource DataSourceId="SqlDataSource1" Name="dsComprobante" />
                             <rsweb:ReportDataSource DataSourceId="SqlDataSource2" Name="dsDetalle" />

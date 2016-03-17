@@ -157,16 +157,19 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>0.88663in</Width>
+              <Width>0.75782in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>5.67321in</Width>
+              <Width>1.95335in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.06638in</Width>
+              <Width>0.60643in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.01429in</Width>
+              <Width>0.5746in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>0.71059in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -186,14 +189,16 @@
                               <Style />
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>i_Cantidad</rd:DefaultName>
                       <Style>
                         <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
+                          <Color>White</Color>
+                          <Style>None</Style>
                         </Border>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
@@ -222,8 +227,8 @@
                       <rd:DefaultName>v_Descripcion</rd:DefaultName>
                       <Style>
                         <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
+                          <Color>White</Color>
+                          <Style>None</Style>
                         </Border>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
@@ -243,17 +248,51 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!f_PrecioUnitario.Value</Value>
+                              <Style>
+                                <Format>0.00;(0.00)</Format>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Right</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>f_PrecioUnitario</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>White</Color>
+                          <Style>None</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox1">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>f_PrecioUnitario</rd:DefaultName>
+                      <rd:DefaultName>Textbox1</rd:DefaultName>
                       <Style>
                         <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
+                          <Color>White</Color>
+                          <Style>None</Style>
                         </Border>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
@@ -273,7 +312,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!f_PrecioTotal.Value</Value>
-                              <Style />
+                              <Style>
+                                <Format>0.00;(0.00)</Format>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -282,8 +323,8 @@
                       <rd:DefaultName>f_PrecioTotal</rd:DefaultName>
                       <Style>
                         <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
+                          <Color>White</Color>
+                          <Style>None</Style>
                         </Border>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
@@ -303,6 +344,7 @@
             <TablixMember />
             <TablixMember />
             <TablixMember />
+            <TablixMember />
           </TablixMembers>
         </TablixColumnHierarchy>
         <TablixRowHierarchy>
@@ -313,10 +355,10 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>dsDetalle</DataSetName>
-        <Top>0.57362cm</Top>
-        <Left>1.68487cm</Left>
+        <Top>0.07056cm</Top>
+        <Left>0.99695cm</Left>
         <Height>0.6cm</Height>
-        <Width>21.9469cm</Width>
+        <Width>11.69109cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -324,13 +366,13 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>0.61458in</Height>
+    <Height>0.30208in</Height>
     <Style />
   </Body>
-  <Width>9.783in</Width>
+  <Width>5.533in</Width>
   <Page>
     <PageHeader>
-      <Height>3.175cm</Height>
+      <Height>3.11458in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -349,10 +391,10 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>v_Nombres</rd:DefaultName>
-          <Top>0.97049cm</Top>
-          <Left>1.68487cm</Left>
+          <Top>5.82147cm</Top>
+          <Left>2.92181cm</Left>
           <Height>0.6cm</Height>
-          <Width>11.57521cm</Width>
+          <Width>6.2508cm</Width>
           <Style>
             <Border>
               <Style>None</Style>
@@ -378,10 +420,10 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>v_Direccion</rd:DefaultName>
-          <Top>1.74688cm</Top>
-          <Left>1.68487cm</Left>
+          <Top>6.56258cm</Top>
+          <Left>2.92181cm</Left>
           <Height>0.6cm</Height>
-          <Width>10.4375cm</Width>
+          <Width>6.2508cm</Width>
           <ZIndex>1</ZIndex>
           <Style>
             <Border>
@@ -404,14 +446,16 @@
                   <Style />
                 </TextRun>
               </TextRuns>
-              <Style />
+              <Style>
+                <TextAlign>Left</TextAlign>
+              </Style>
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>v_DocumentoIdentidad</rd:DefaultName>
-          <Top>1.4732cm</Top>
-          <Left>18.38008cm</Left>
+          <Top>6.56258cm</Top>
+          <Left>10.50551cm</Left>
           <Height>0.6cm</Height>
-          <Width>5.25167cm</Width>
+          <Width>2.50003cm</Width>
           <ZIndex>2</ZIndex>
           <Style>
             <Border>
@@ -431,17 +475,21 @@
               <TextRuns>
                 <TextRun>
                   <Value>=First(Fields!d_FechaEmision.Value, "dsComprobante")</Value>
-                  <Style />
+                  <Style>
+                    <Format>dd/MM/yyyy</Format>
+                  </Style>
                 </TextRun>
               </TextRuns>
-              <Style />
+              <Style>
+                <TextAlign>Left</TextAlign>
+              </Style>
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>d_FechaEmision</rd:DefaultName>
-          <Top>0.69681cm</Top>
-          <Left>18.38008cm</Left>
+          <Top>5.78619cm</Top>
+          <Left>10.91886cm</Left>
           <Height>0.6cm</Height>
-          <Width>5.25167cm</Width>
+          <Width>2.08668cm</Width>
           <ZIndex>3</ZIndex>
           <Style>
             <Border>
@@ -461,76 +509,10 @@
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>3.81cm</Height>
+      <Height>1.33333in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
-        <Textbox Name="f_SubTotal">
-          <CanGrow>true</CanGrow>
-          <KeepTogether>true</KeepTogether>
-          <Paragraphs>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value>=Sum(Fields!f_SubTotal.Value, "dsComprobante")</Value>
-                  <Style />
-                </TextRun>
-              </TextRuns>
-              <Style>
-                <TextAlign>Right</TextAlign>
-              </Style>
-            </Paragraph>
-          </Paragraphs>
-          <rd:DefaultName>f_SubTotal</rd:DefaultName>
-          <Top>0.62653cm</Top>
-          <Left>21.13174cm</Left>
-          <Height>0.6cm</Height>
-          <Width>2.5cm</Width>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
-          </Style>
-        </Textbox>
-        <Textbox Name="f_Impuesto">
-          <CanGrow>true</CanGrow>
-          <KeepTogether>true</KeepTogether>
-          <Paragraphs>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value>=Sum(Fields!f_Impuesto.Value, "dsComprobante")</Value>
-                  <Style />
-                </TextRun>
-              </TextRuns>
-              <Style>
-                <TextAlign>Right</TextAlign>
-              </Style>
-            </Paragraph>
-          </Paragraphs>
-          <rd:DefaultName>f_Impuesto</rd:DefaultName>
-          <Top>1.60549cm</Top>
-          <Left>21.13174cm</Left>
-          <Height>0.6cm</Height>
-          <Width>2.5cm</Width>
-          <ZIndex>1</ZIndex>
-          <Visibility>
-            <Hidden>=(First(Fields!v_TipoDocumento.Value, "dsComprobante") = "Boleta")</Hidden>
-          </Visibility>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
-          </Style>
-        </Textbox>
         <Textbox Name="f_Total">
           <CanGrow>true</CanGrow>
           <KeepTogether>true</KeepTogether>
@@ -539,7 +521,9 @@
               <TextRuns>
                 <TextRun>
                   <Value>=Sum(Fields!f_Total.Value, "dsComprobante")</Value>
-                  <Style />
+                  <Style>
+                    <Format>0.00;(0.00)</Format>
+                  </Style>
                 </TextRun>
               </TextRuns>
               <Style>
@@ -548,11 +532,10 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>f_Total</rd:DefaultName>
-          <Top>2.55799cm</Top>
-          <Left>21.13174cm</Left>
+          <Top>2.4cm</Top>
+          <Left>10.50551cm</Left>
           <Height>0.6cm</Height>
-          <Width>2.5cm</Width>
-          <ZIndex>2</ZIndex>
+          <Width>2.18253cm</Width>
           <Style>
             <Border>
               <Style>None</Style>
@@ -578,11 +561,11 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>t_MontoEscrito</rd:DefaultName>
-          <Top>0.10583cm</Top>
-          <Left>1.68487cm</Left>
+          <Top>0.4cm</Top>
+          <Left>2.29341cm</Left>
           <Height>0.6cm</Height>
-          <Width>13.42729cm</Width>
-          <ZIndex>3</ZIndex>
+          <Width>10.39463cm</Width>
+          <ZIndex>1</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
@@ -600,15 +583,11 @@
         </Border>
       </Style>
     </PageFooter>
-    <PageHeight>29.7cm</PageHeight>
-    <PageWidth>21cm</PageWidth>
-    <LeftMargin>2cm</LeftMargin>
-    <RightMargin>2cm</RightMargin>
-    <TopMargin>2cm</TopMargin>
-    <BottomMargin>2cm</BottomMargin>
-    <ColumnSpacing>0.13cm</ColumnSpacing>
+    <PageHeight>5.90551in</PageHeight>
+    <PageWidth>5.51181in</PageWidth>
+    <ColumnSpacing>0.05118in</ColumnSpacing>
     <Style />
   </Page>
   <rd:ReportID>a52fa92c-3f2f-41a7-9a28-f7ec99281147</rd:ReportID>
-  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
 </Report>
