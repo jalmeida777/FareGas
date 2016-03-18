@@ -11,7 +11,7 @@
                 <td>
                     <h1 class="label">
                         <asp:Image ID="Image1" runat="server" ImageUrl="~/images/statistics.png" />
-                        &nbsp;Imprimir Comprobante<asp:HiddenField ID="hfIdComprobante" 
+                        &nbsp;Imprimir Boleta AYN RAND<asp:HiddenField ID="hfIdComprobante" 
                             runat="server" />
                     </h1>
                 </td>

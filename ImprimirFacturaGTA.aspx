@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Imprimir Boleta GTA" Language="C#" MasterPageFile="~/Plantilla.master" AutoEventWireup="true" CodeFile="ImprimirBoletaGTA.aspx.cs" Inherits="ImprimirBoletaGTA" %>
+﻿<%@ Page Title="Imprimir Factura GTA" Language="C#" MasterPageFile="~/Plantilla.master" AutoEventWireup="true" CodeFile="ImprimirFacturaGTA.aspx.cs" Inherits="ImprimirFacturaGTA" %>
 <%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="cc1" %>
 <%@ Register assembly="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" namespace="Microsoft.Reporting.WebForms" tagprefix="rsweb" %>
 
@@ -6,13 +6,13 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
 
-    <div class="divBusqueda">
+<div class="divBusqueda">
         <table width="100%">
             <tr>
                 <td>
                     <h1 class="label">
                         <asp:Image ID="Image1" runat="server" ImageUrl="~/images/statistics.png" />
-                        &nbsp;Imprimir Boleta GTA<asp:HiddenField ID="hfIdComprobante" 
+                        &nbsp;Imprimir Factura GTA<asp:HiddenField ID="hfIdComprobante" 
                             runat="server" />
                     </h1>
                 </td>
@@ -86,7 +86,7 @@
                     Font-Size="8pt" InteractiveDeviceInfos="(Collection)" 
                     WaitMessageFont-Names="Verdana" 
     WaitMessageFont-Size="14pt" Width="100%">
-                    <LocalReport ReportPath="BoletaGTA.rdlc">
+                    <LocalReport ReportPath="FacturaGTA.rdlc">
                         <DataSources>
                             <rsweb:ReportDataSource DataSourceId="SqlDataSource1" Name="dsComprobante" />
                             <rsweb:ReportDataSource DataSourceId="SqlDataSource2" Name="dsDetalle" />
