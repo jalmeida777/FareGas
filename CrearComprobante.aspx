@@ -134,7 +134,7 @@
                         </td>
                         <td style="padding-left: 5px" __designer:mapid="40c">
                             <asp:TextBox runat="server" MaxLength="10" CssClass="inputsFecha" 
-                                Enabled="False" ID="txtFechaInicial"></asp:TextBox>
+                                ID="txtFechaInicial"></asp:TextBox>
 
                             <cc1:CalendarExtender runat="server" Format="dd/MM/yyyy" Enabled="True" 
                                 TargetControlID="txtFechaInicial" ID="CalendarExtender1"></cc1:CalendarExtender>

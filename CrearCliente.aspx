@@ -188,8 +188,8 @@
             </td>
             <td style="padding-left: 5px">
                     <asp:RadioButtonList runat="server" RepeatDirection="Horizontal" 
-                    Width="210px" ID="rblSexo"><asp:ListItem Selected="True" Value="A">Femenino</asp:ListItem>
-<asp:ListItem Value="O">Masculino</asp:ListItem>
+                    Width="210px" ID="rblSexo"><asp:ListItem Selected="True" Value="F">Femenino</asp:ListItem>
+<asp:ListItem Value="M">Masculino</asp:ListItem>
 </asp:RadioButtonList>
 
             </td>
